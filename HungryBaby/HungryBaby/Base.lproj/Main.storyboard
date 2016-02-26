@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tFq-LT-YgR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qHY-Tn-b6P">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -81,15 +81,27 @@
                                     <outlet property="delegate" destination="qHY-Tn-b6P" id="xNH-JF-ndp"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9bg-Rc-dor">
+                                <rect key="frame" x="0.0" y="521" width="600" height="29"/>
+                                <segments>
+                                    <segment title="All Recipes"/>
+                                    <segment title="Favorites"/>
+                                    <segment title="Snacks"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9bg-Rc-dor" firstAttribute="bottom" secondItem="qjD-c9-NUG" secondAttribute="top" constant="-2" id="6AQ-ty-jgW"/>
+                            <constraint firstItem="9bg-Rc-dor" firstAttribute="trailing" secondItem="sHh-2z-HP5" secondAttribute="trailing" id="Bxh-2z-ruX"/>
                             <constraint firstItem="sHh-2z-HP5" firstAttribute="leading" secondItem="ybf-qY-Rhf" secondAttribute="leading" id="Jh1-Cq-ndz"/>
                             <constraint firstAttribute="trailing" secondItem="sHh-2z-HP5" secondAttribute="trailing" id="Nsj-mQ-h88"/>
-                            <constraint firstItem="sHh-2z-HP5" firstAttribute="bottom" secondItem="qjD-c9-NUG" secondAttribute="top" id="Tge-SR-bkU"/>
+                            <constraint firstItem="sHh-2z-HP5" firstAttribute="bottom" secondItem="qjD-c9-NUG" secondAttribute="top" constant="49" id="Tge-SR-bkU"/>
                             <constraint firstItem="sHh-2z-HP5" firstAttribute="top" secondItem="1d6-Ux-aIF" secondAttribute="bottom" id="vYb-Bz-LAM"/>
+                            <constraint firstItem="9bg-Rc-dor" firstAttribute="leading" secondItem="sHh-2z-HP5" secondAttribute="leading" id="z1G-tf-gvN"/>
                         </constraints>
                     </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="ML5-ea-cFO" id="rqb-J6-yWW"/>
                     </connections>

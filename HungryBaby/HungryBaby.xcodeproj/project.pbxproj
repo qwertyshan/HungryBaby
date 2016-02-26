@@ -12,6 +12,18 @@
 		8F15A9981C7F8A8A0009AA9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F15A9971C7F8A8A0009AA9E /* Assets.xcassets */; };
 		8F15A99B1C7F8A8A0009AA9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F15A9991C7F8A8A0009AA9E /* LaunchScreen.storyboard */; };
 		8FB9AE091C7FC21C00B855C0 /* RecipeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE081C7FC21C00B855C0 /* RecipeListVC.swift */; };
+		8FB9AE0C1C80F97B00B855C0 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE0B1C80F97B00B855C0 /* Recipe.swift */; };
+		8FB9AE0E1C80F98A00B855C0 /* MealPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE0D1C80F98A00B855C0 /* MealPlan.swift */; };
+		8FB9AE101C80F99800B855C0 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE0F1C80F99800B855C0 /* ShoppingList.swift */; };
+		8FB9AE121C80F9A600B855C0 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE111C80F9A600B855C0 /* Configuration.swift */; };
+		8FB9AE141C80FA9000B855C0 /* MealPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE131C80FA9000B855C0 /* MealPlanVC.swift */; };
+		8FB9AE161C80FAA100B855C0 /* ShoppingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE151C80FAA100B855C0 /* ShoppingListVC.swift */; };
+		8FB9AE181C80FAB200B855C0 /* NutritionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE171C80FAB200B855C0 /* NutritionVC.swift */; };
+		8FB9AE1A1C80FABE00B855C0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE191C80FABE00B855C0 /* Settings.swift */; };
+		8FB9AE1C1C80FAD200B855C0 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */; };
+		8FB9AE1E1C80FB0100B855C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1D1C80FB0100B855C0 /* Constants.swift */; };
+		8FB9AE201C80FB2800B855C0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1F1C80FB2800B855C0 /* APIClient.swift */; };
+		8FB9AE221C80FB3400B855C0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE211C80FB3400B855C0 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +34,18 @@
 		8F15A99A1C7F8A8A0009AA9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F15A99C1C7F8A8A0009AA9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB9AE081C7FC21C00B855C0 /* RecipeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListVC.swift; sourceTree = "<group>"; };
+		8FB9AE0B1C80F97B00B855C0 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		8FB9AE0D1C80F98A00B855C0 /* MealPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
+		8FB9AE0F1C80F99800B855C0 /* ShoppingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
+		8FB9AE111C80F9A600B855C0 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		8FB9AE131C80FA9000B855C0 /* MealPlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlanVC.swift; sourceTree = "<group>"; };
+		8FB9AE151C80FAA100B855C0 /* ShoppingListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListVC.swift; sourceTree = "<group>"; };
+		8FB9AE171C80FAB200B855C0 /* NutritionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutritionVC.swift; sourceTree = "<group>"; };
+		8FB9AE191C80FABE00B855C0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
+		8FB9AE1D1C80FB0100B855C0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8FB9AE1F1C80FB2800B855C0 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		8FB9AE211C80FB3400B855C0 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +78,13 @@
 		8F15A98D1C7F8A8A0009AA9E /* HungryBaby */ = {
 			isa = PBXGroup;
 			children = (
+				8FB9AE0A1C80F96000B855C0 /* Model */,
 				8FB9AE081C7FC21C00B855C0 /* RecipeListVC.swift */,
+				8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */,
+				8FB9AE131C80FA9000B855C0 /* MealPlanVC.swift */,
+				8FB9AE151C80FAA100B855C0 /* ShoppingListVC.swift */,
+				8FB9AE171C80FAB200B855C0 /* NutritionVC.swift */,
+				8FB9AE191C80FABE00B855C0 /* Settings.swift */,
 				8F15A9941C7F8A8A0009AA9E /* Main.storyboard */,
 				8F15A9971C7F8A8A0009AA9E /* Assets.xcassets */,
 				8F15A9991C7F8A8A0009AA9E /* LaunchScreen.storyboard */,
@@ -62,6 +92,20 @@
 				8F15A98E1C7F8A8A0009AA9E /* AppDelegate.swift */,
 			);
 			path = HungryBaby;
+			sourceTree = "<group>";
+		};
+		8FB9AE0A1C80F96000B855C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9AE0B1C80F97B00B855C0 /* Recipe.swift */,
+				8FB9AE0D1C80F98A00B855C0 /* MealPlan.swift */,
+				8FB9AE0F1C80F99800B855C0 /* ShoppingList.swift */,
+				8FB9AE111C80F9A600B855C0 /* Configuration.swift */,
+				8FB9AE1D1C80FB0100B855C0 /* Constants.swift */,
+				8FB9AE1F1C80FB2800B855C0 /* APIClient.swift */,
+				8FB9AE211C80FB3400B855C0 /* ImageCache.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +180,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB9AE121C80F9A600B855C0 /* Configuration.swift in Sources */,
+				8FB9AE1C1C80FAD200B855C0 /* RecipeDetailVC.swift in Sources */,
+				8FB9AE0C1C80F97B00B855C0 /* Recipe.swift in Sources */,
 				8FB9AE091C7FC21C00B855C0 /* RecipeListVC.swift in Sources */,
+				8FB9AE101C80F99800B855C0 /* ShoppingList.swift in Sources */,
+				8FB9AE1A1C80FABE00B855C0 /* Settings.swift in Sources */,
+				8FB9AE161C80FAA100B855C0 /* ShoppingListVC.swift in Sources */,
+				8FB9AE181C80FAB200B855C0 /* NutritionVC.swift in Sources */,
 				8F15A98F1C7F8A8A0009AA9E /* AppDelegate.swift in Sources */,
+				8FB9AE201C80FB2800B855C0 /* APIClient.swift in Sources */,
+				8FB9AE0E1C80F98A00B855C0 /* MealPlan.swift in Sources */,
+				8FB9AE141C80FA9000B855C0 /* MealPlanVC.swift in Sources */,
+				8FB9AE221C80FB3400B855C0 /* ImageCache.swift in Sources */,
+				8FB9AE1E1C80FB0100B855C0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
