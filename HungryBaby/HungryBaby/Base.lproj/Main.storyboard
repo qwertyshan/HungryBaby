@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qHY-Tn-b6P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2JG-D1-h1O">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login VC-->
+        <scene sceneID="Bdm-En-gb5">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" title="Login VC" id="2JG-D1-h1O" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fgS-Z3-zmR"/>
+                        <viewControllerLayoutGuide type="bottom" id="yaZ-eX-jqM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PhS-hR-PFZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6PO-Oa-hp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-943" y="112"/>
+        </scene>
+        <!--Tab View Controller-->
         <scene sceneID="GIS-V7-3am">
             <objects>
-                <viewController id="tFq-LT-YgR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TabViewController" title="Tab View Controller" id="tFq-LT-YgR" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hgs-3u-Q4j"/>
                         <viewControllerLayoutGuide type="bottom" id="0sv-eF-jTl"/>
@@ -32,11 +50,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="xTJ-tH-M1D" kind="show" id="2Yj-27-GLs"/>
-                        <segue destination="Rqw-P9-bDL" kind="show" id="NtO-fB-yXL"/>
-                        <segue destination="MQJ-EW-xxu" kind="show" id="aem-7h-UFN"/>
-                        <segue destination="UQQ-fX-a37" kind="show" id="Mfj-PB-WrF"/>
-                        <segue destination="qHY-Tn-b6P" kind="show" id="J3y-UK-8JN"/>
+                        <segue destination="xTJ-tH-M1D" kind="show" identifier="MealPlanSegue" id="2Yj-27-GLs"/>
+                        <segue destination="Rqw-P9-bDL" kind="show" identifier="ShoppingListSegue" id="NtO-fB-yXL"/>
+                        <segue destination="MQJ-EW-xxu" kind="show" identifier="NutritionSegue" id="aem-7h-UFN"/>
+                        <segue destination="UQQ-fX-a37" kind="show" identifier="SettingsSegue" id="Mfj-PB-WrF"/>
+                        <segue destination="qHY-Tn-b6P" kind="show" identifier="RecipeListSegue" id="J3y-UK-8JN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVD-aU-vA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -67,7 +85,7 @@
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="recipeCell" selectionStyle="default" indentationWidth="10" id="LvC-cd-Ncq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="recipeCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" id="LvC-cd-Ncq">
                                         <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LvC-cd-Ncq" id="n6G-fn-kkE">
