@@ -21,8 +21,8 @@ class MealPlan: NSObject {
     
     // MARK: - Properties
     
-    var mealPlan: [MealEntry]?
-    var startDate: NSDate?
+    var mealPlan: [MealEntry]
+    var startDate: NSDate
     
     // MARK: - Methods
     

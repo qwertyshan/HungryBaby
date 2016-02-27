@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class ShoppingList: NSObject {
+    
+    // MARK: - Properties
+    
+    var items: [Recipe.Ingredient]?
+    var mealPlan: MealPlan
+    
+    // MARK: - Methods
+    
+    init(items: [Recipe.Ingredient]?, mealPlan: MealPlan) {
+        self.items = items
+        self.mealPlan = mealPlan
+    }
+    
+}
