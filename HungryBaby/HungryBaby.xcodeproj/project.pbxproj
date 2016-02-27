@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54BBDB5EBD35026F3BDFF724 /* libPods-HungryBaby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF9180DB626D944B640EF6 /* libPods-HungryBaby.a */; };
 		8F15A98F1C7F8A8A0009AA9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15A98E1C7F8A8A0009AA9E /* AppDelegate.swift */; };
 		8F15A9961C7F8A8A0009AA9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F15A9941C7F8A8A0009AA9E /* Main.storyboard */; };
 		8F15A9981C7F8A8A0009AA9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F15A9971C7F8A8A0009AA9E /* Assets.xcassets */; };
@@ -21,12 +22,14 @@
 		8FB9AE181C80FAB200B855C0 /* NutritionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE171C80FAB200B855C0 /* NutritionVC.swift */; };
 		8FB9AE1A1C80FABE00B855C0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE191C80FABE00B855C0 /* Settings.swift */; };
 		8FB9AE1C1C80FAD200B855C0 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */; };
-		8FB9AE1E1C80FB0100B855C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1D1C80FB0100B855C0 /* Constants.swift */; };
+		8FB9AE1E1C80FB0100B855C0 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1D1C80FB0100B855C0 /* APIConstants.swift */; };
 		8FB9AE201C80FB2800B855C0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE1F1C80FB2800B855C0 /* APIClient.swift */; };
 		8FB9AE221C80FB3400B855C0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE211C80FB3400B855C0 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40114CD567885C85E5BFE643 /* Pods-HungryBaby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryBaby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryBaby/Pods-HungryBaby.debug.xcconfig"; sourceTree = "<group>"; };
+		7DED1311205FA9B6F49972D0 /* Pods-HungryBaby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryBaby.release.xcconfig"; path = "Pods/Target Support Files/Pods-HungryBaby/Pods-HungryBaby.release.xcconfig"; sourceTree = "<group>"; };
 		8F15A98B1C7F8A8A0009AA9E /* HungryBaby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HungryBaby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F15A98E1C7F8A8A0009AA9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F15A9951C7F8A8A0009AA9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -43,9 +46,10 @@
 		8FB9AE171C80FAB200B855C0 /* NutritionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutritionVC.swift; sourceTree = "<group>"; };
 		8FB9AE191C80FABE00B855C0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
-		8FB9AE1D1C80FB0100B855C0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8FB9AE1D1C80FB0100B855C0 /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		8FB9AE1F1C80FB2800B855C0 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		8FB9AE211C80FB3400B855C0 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		D4DF9180DB626D944B640EF6 /* libPods-HungryBaby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HungryBaby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,17 +57,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54BBDB5EBD35026F3BDFF724 /* libPods-HungryBaby.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74F40699F050C337EF9DB41D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				40114CD567885C85E5BFE643 /* Pods-HungryBaby.debug.xcconfig */,
+				7DED1311205FA9B6F49972D0 /* Pods-HungryBaby.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8F15A9821C7F8A8A0009AA9E = {
 			isa = PBXGroup;
 			children = (
 				8F15A98D1C7F8A8A0009AA9E /* HungryBaby */,
 				8F15A98C1C7F8A8A0009AA9E /* Products */,
+				74F40699F050C337EF9DB41D /* Pods */,
+				B3BC17600B249DBC1C50E7FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,11 +117,19 @@
 				8FB9AE0D1C80F98A00B855C0 /* MealPlan.swift */,
 				8FB9AE0F1C80F99800B855C0 /* ShoppingList.swift */,
 				8FB9AE111C80F9A600B855C0 /* Configuration.swift */,
-				8FB9AE1D1C80FB0100B855C0 /* Constants.swift */,
+				8FB9AE1D1C80FB0100B855C0 /* APIConstants.swift */,
 				8FB9AE1F1C80FB2800B855C0 /* APIClient.swift */,
 				8FB9AE211C80FB3400B855C0 /* ImageCache.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		B3BC17600B249DBC1C50E7FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4DF9180DB626D944B640EF6 /* libPods-HungryBaby.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,9 +139,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F15A99F1C7F8A8A0009AA9E /* Build configuration list for PBXNativeTarget "HungryBaby" */;
 			buildPhases = (
+				99E02BD11273446226E210A1 /* Check Pods Manifest.lock */,
 				8F15A9871C7F8A8A0009AA9E /* Sources */,
 				8F15A9881C7F8A8A0009AA9E /* Frameworks */,
 				8F15A9891C7F8A8A0009AA9E /* Resources */,
+				0E319A42F14FDE68EA618706 /* Embed Pods Frameworks */,
+				721B6D92E18832D1400848C2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -175,6 +202,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0E319A42F14FDE68EA618706 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryBaby/Pods-HungryBaby-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		721B6D92E18832D1400848C2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryBaby/Pods-HungryBaby-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99E02BD11273446226E210A1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8F15A9871C7F8A8A0009AA9E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -193,7 +268,7 @@
 				8FB9AE0E1C80F98A00B855C0 /* MealPlan.swift in Sources */,
 				8FB9AE141C80FA9000B855C0 /* MealPlanVC.swift in Sources */,
 				8FB9AE221C80FB3400B855C0 /* ImageCache.swift in Sources */,
-				8FB9AE1E1C80FB0100B855C0 /* Constants.swift in Sources */,
+				8FB9AE1E1C80FB0100B855C0 /* APIConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +377,7 @@
 		};
 		8F15A9A01C7F8A8A0009AA9E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40114CD567885C85E5BFE643 /* Pods-HungryBaby.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HungryBaby/Info.plist;
@@ -313,6 +389,7 @@
 		};
 		8F15A9A11C7F8A8A0009AA9E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DED1311205FA9B6F49972D0 /* Pods-HungryBaby.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HungryBaby/Info.plist;
