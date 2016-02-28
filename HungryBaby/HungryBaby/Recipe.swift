@@ -45,6 +45,12 @@ class Recipe: NSObject {
         var quantity: Double
         var unit: Unit
         var note: String?
+        init() {
+            item = ""
+            quantity = 0.00
+            unit = .None
+            note = nil
+        }
     }
     
     struct Nutrition {
@@ -104,7 +110,7 @@ class Recipe: NSObject {
         self.endAge     = dictionary[Keys.EndAge]   as? Int
         if let ingredients = dictionary[Keys.Ingredients] as? [[String: AnyObject]] {
             for ingredient in ingredients {
-                var newIngredient: Ingredient
+                var newIngredient = Ingredient.init()
                 newIngredient.item      = ingredient[Keys.Item] as! String
                 newIngredient.quantity  = ingredient[Keys.Quantity] as! Double
                 newIngredient.unit      = ingredient[Keys.Unit] as! Unit
