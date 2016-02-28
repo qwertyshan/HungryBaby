@@ -11,29 +11,47 @@ import UIKit
 
 class LoginVC: UIViewController {
     
+    // MARK: - IB Outlets
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var loginWithEmail: UIButton!
-    @IBOutlet weak var loginAnonymously: UIButton!
+
+    // MARK: - View Setups
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("debug in LoginVC")
-        getDataOnLogin()
         
+    }
+    
+    // MARK: - IB Actions
+    
+    @IBAction func loginWithEmail(sender: UIButton) {
+        if (email.text != nil) && (password.text != nil) {
+            APIClient.sharedInstance().loginWithEmail(email.text!, password: password.text!, completionHandler: loginCompletionHandler)
+        }
+    }
+    
+    @IBAction func loginAnonymously(sender: UIButton) {
+        APIClient.sharedInstance().loginAnonymously(loginCompletionHandler)
+    }
+    
+    // MARK: - Helper Methods
+    
+    func loginCompletionHandler(data: AnyObject?, error: NSError?) -> Void {
+        if (error != nil) {
+            print("Failed login with error: \(error)")
+        } else {
+            print("Login successful")
+            self.getDataOnLogin()
+        }
     }
     
     func getDataOnLogin() {
         APIClient.sharedInstance().getRecipePackage({data, error in
-            print("debug2 in LoginVC")
-            
             if (error != nil) {
-                print("debug3 in LoginVC")
-                
                 print(error)
             } else {
-                print("debug4 in LoginVC")
-                
                 print(data)
             }
         })

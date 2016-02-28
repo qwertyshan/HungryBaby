@@ -15,9 +15,11 @@ class APIClient: NSObject {
     typealias CompletionHander = (data: AnyObject!, error: NSError?) -> Void
     
     var session: NSURLSession
+    var token: NSString
     
     override init() {
         session = NSURLSession.sharedSession()
+        token = ""
         super.init()
     }
     
@@ -47,8 +49,11 @@ class APIClient: NSObject {
                 
                 if error != nil {
                     // There was an error logging in to this account
+                    return completionHandler(data: nil, error: error)
                 } else {
                     // We are now logged in
+                    self.token = authData.token
+                    return completionHandler(data: authData, error: nil)
                 }
         })
     }
@@ -73,8 +78,11 @@ class APIClient: NSObject {
         ref.authAnonymouslyWithCompletionBlock { error, authData in
             if error != nil {
                 // There was an error logging in anonymously
+                return completionHandler(data: nil, error: error)
             } else {
                 // We are now logged in
+                self.token = authData.token
+                return completionHandler(data: authData, error: nil)
             }
         }
     }
