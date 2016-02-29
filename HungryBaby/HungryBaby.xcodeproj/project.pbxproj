@@ -27,6 +27,7 @@
 		8FB9AE241C8231F900B855C0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE231C8231F900B855C0 /* LoginVC.swift */; };
 		8FB9AE281C82426400B855C0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9AE271C82426400B855C0 /* APIClient.swift */; };
 		8FBABB8A1C83CB910077633F /* CommonElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABB891C83CB910077633F /* CommonElements.swift */; };
+		8FBABB8C1C84E1260077633F /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABB8B1C84E1260077633F /* RecipeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		8FB9AE231C8231F900B855C0 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		8FB9AE271C82426400B855C0 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		8FBABB891C83CB910077633F /* CommonElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonElements.swift; sourceTree = "<group>"; };
+		8FBABB8B1C84E1260077633F /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		C72E72065960AF3A6EAC0242 /* Pods_HungryBaby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryBaby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD24FB59BA18A0774975D67 /* Pods-HungryBaby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryBaby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryBaby/Pods-HungryBaby.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				8FB9AE231C8231F900B855C0 /* LoginVC.swift */,
 				8FBABB891C83CB910077633F /* CommonElements.swift */,
 				8FB9AE081C7FC21C00B855C0 /* RecipeListVC.swift */,
+				8FBABB8B1C84E1260077633F /* RecipeCell.swift */,
 				8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */,
 				8FB9AE131C80FA9000B855C0 /* MealPlanVC.swift */,
 				8FB9AE151C80FAA100B855C0 /* ShoppingListVC.swift */,
@@ -257,6 +260,7 @@
 				8FB9AE1C1C80FAD200B855C0 /* RecipeDetailVC.swift in Sources */,
 				8FB9AE0C1C80F97B00B855C0 /* Recipe.swift in Sources */,
 				8FB9AE091C7FC21C00B855C0 /* RecipeListVC.swift in Sources */,
+				8FBABB8C1C84E1260077633F /* RecipeCell.swift in Sources */,
 				8FB9AE101C80F99800B855C0 /* ShoppingList.swift in Sources */,
 				8FBABB8A1C83CB910077633F /* CommonElements.swift in Sources */,
 				8FB9AE1A1C80FABE00B855C0 /* Settings.swift in Sources */,

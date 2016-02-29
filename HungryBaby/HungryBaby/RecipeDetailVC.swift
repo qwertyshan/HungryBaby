@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import UIKit
+
+class RecipeDetailVC: UIViewController {
+    
+    // MARK: - Properties
+    
+    var recipe = Recipe()
+    var recipeIndex: Int? = nil
+    
+}

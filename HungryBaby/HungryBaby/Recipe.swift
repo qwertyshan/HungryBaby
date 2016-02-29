@@ -11,6 +11,7 @@ import UIKit
 
 class Recipe: NSObject {
     struct Keys {
+        static let Favorite = "favorite"
         static let Version = "version"
         static let Name = "name"
         static let Summary = "summary"
@@ -60,6 +61,7 @@ class Recipe: NSObject {
         var calories: Double?
     }
     
+    var favorite: Bool?
     var version: Double?
     var name: String?
     var summary: String?
@@ -100,7 +102,8 @@ class Recipe: NSObject {
     // Init with dictionary
     
     init(dictionary: [String : AnyObject]) {
-        self.version    = dictionary[Keys.Version]  as? Double
+        self.favorite   = dictionary[Keys.Favorite] as? Bool
+        self.version    = Double((dictionary[Keys.Version]  as? String)!)
         self.name       = dictionary[Keys.Name]     as? String
         self.summary    = dictionary[Keys.Summary]  as? String
         self.imagePath  = dictionary[Keys.ImagePath] as? String
@@ -114,7 +117,7 @@ class Recipe: NSObject {
             for ingredient in ingredients {
                 var newIngredient = Ingredient.init()
                 newIngredient.item      = ingredient[Keys.Item] as! String
-                newIngredient.quantity  = Double(ingredient[Keys.Quantity] as! String)!
+                newIngredient.quantity  = Double((ingredient[Keys.Quantity] as? String)!)!
                 switch (ingredient[Keys.Unit] as! String).lowercaseString {
                 case "gram": newIngredient.unit = .Gram
                 case "kilogram": newIngredient.unit = .Kilogram
@@ -140,6 +143,23 @@ class Recipe: NSObject {
             self.nutrition?.proteins        = nutrition[Keys.Portions]      as? Double
             self.nutrition?.calories        = nutrition[Keys.Calories]      as? Double
         }
+    }
+    
+    override init() {
+        self.favorite   = nil
+        self.version    = nil
+        self.name       = nil
+        self.summary    = nil
+        self.imagePath  = nil
+        self.prepTime   = nil
+        self.cookTime   = nil
+        self.portions   = nil
+        self.snack      = nil
+        self.startAge   = nil
+        self.endAge     = nil
+        self.ingredients = nil
+        self.method     = nil
+        self.nutrition  = nil
     }
     
     // MARK: - Shared Instance
