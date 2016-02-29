@@ -21,6 +21,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
     // MARK: - View Setups
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        email.delegate = self
+        password.delegate = self
+    }
+    
     override func viewWillAppear(animated: Bool) {
         subscribeToKeyboardNotifications()
     }
@@ -117,6 +123,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
         //print("stopped ActivityIndicator")
+    }
+    
+    func handleSingleTap(sender: UITapGestureRecognizer) {
+            self.view.endEditing(true)
     }
     
     // MARK: - Delegate Methods
