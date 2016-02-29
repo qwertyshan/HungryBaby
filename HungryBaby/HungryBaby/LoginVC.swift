@@ -13,6 +13,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
+    var recipes = [Recipe]()
     
     // MARK: - IB Outlets
     
@@ -63,7 +64,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func getDataOnLogin() {
-        var recipes = [Recipe]()
         let activityIndicator = UIActivityIndicatorView()
         initActivityIndicator(activityIndicator)
         activityIndicator.startAnimating()
@@ -75,10 +75,32 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             } else {
                 for dictionary in data as! NSArray {
                     let recipe = Recipe(dictionary: dictionary as! [String : AnyObject])
-                    recipes.append(recipe)
-                    print(recipe.name)
+                    var copiedRecipeAlready = false
+                    if let i = self.recipes.indexOf({$0.name! == recipe.name}) {
+                        print("Found existing recipe: \(self.recipes[i].name!)")
+                        //print(self.recipes[i].version)
+                        if let currentVersion = self.recipes[i].version {
+                            //print(currentVersion)
+                            if currentVersion < recipe.version! as Double {
+                                recipe.favorite = self.recipes[i].favorite   // Copy current favorite status
+                                self.recipes[i] = recipe // Copy new recipe into current recipe
+                                copiedRecipeAlready = true
+                                print("Updated existing recipe: \(recipe.name!)")
+                            } else {
+                                print("Current version is latest.")
+                            }
+                        }
+                    }
+                    if copiedRecipeAlready == false {
+                        recipe.nutrition?.carbohydrates = Double(arc4random_uniform(101))
+                        recipe.nutrition?.proteins = Double(arc4random_uniform(101))
+                        recipe.nutrition?.fats = Double(arc4random_uniform(101))
+                        recipe.nutrition?.calories = Double(arc4random_uniform(101))
+                        self.recipes.append(recipe)
+                        print("Adding recipe for: \(recipe.name!)")
+                    }
                 }
-                for recipe in recipes {
+                for recipe in self.recipes {
                     // Do we have the image?
                     if recipe.image == nil {
                         // Do we have the imagePath?
@@ -101,13 +123,27 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         }
                     }
                 }
-                //let controller: UIViewController
-                //controller.recipes = recipes
             }
             dispatch_async(dispatch_get_main_queue()){
                 self.stopActivityIndicator(activityIndicator)
             }
         })
+        
+        // Start main app
+        startMainApp()
+    }
+    
+    func startMainApp() {
+        performSegueWithIdentifier("TabBarSegue", sender: self)
+
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TabBarSegue" {
+            let tabBarController = segue.destinationViewController as! UITabBarController
+            let viewController = tabBarController.viewControllers?[0] as! RecipeListVC
+            viewController.recipes = recipes
+        }
     }
     
     func initActivityIndicator(activityIndicator: UIActivityIndicatorView) {
