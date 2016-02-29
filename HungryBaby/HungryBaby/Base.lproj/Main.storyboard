@@ -45,7 +45,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="OBz-7R-SK3"/>
                                                         <constraint firstAttribute="width" constant="224" id="cKD-fO-cWD"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKZ-in-B4v">
@@ -54,7 +54,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="l1Z-wg-MVx"/>
                                                         <constraint firstAttribute="width" constant="224" id="wS1-HS-6d4"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aM-pw-eFY">
@@ -64,6 +64,7 @@
                                                         <constraint firstAttribute="width" constant="224" id="LbR-3m-Ud9"/>
                                                         <constraint firstAttribute="height" constant="30" id="XcT-Vh-CR1"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <state key="normal" title="Login"/>
                                                     <connections>
                                                         <action selector="loginWithEmail:" destination="2JG-D1-h1O" eventType="touchUpInside" id="DNB-ZM-93I"/>
@@ -76,7 +77,7 @@
                                                         <constraint firstAttribute="width" constant="152" id="1jb-y4-6xS"/>
                                                         <constraint firstAttribute="height" constant="30" id="Hcw-gB-zq8"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Login Anonymously"/>
                                                     <connections>
                                                         <action selector="loginAnonymously:" destination="2JG-D1-h1O" eventType="touchUpInside" id="XMz-C5-LEY"/>
