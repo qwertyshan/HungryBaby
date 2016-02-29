@@ -125,10 +125,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         //print("stopped ActivityIndicator")
     }
     
-    func handleSingleTap(sender: UITapGestureRecognizer) {
-            self.view.endEditing(true)
-    }
-    
     // MARK: - Delegate Methods
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
