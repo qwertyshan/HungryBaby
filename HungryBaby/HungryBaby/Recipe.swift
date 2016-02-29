@@ -97,6 +97,8 @@ class Recipe: NSObject {
     
     // MARK: - Methods
     
+    // Init with dictionary
+    
     init(dictionary: [String : AnyObject]) {
         self.version    = dictionary[Keys.Version]  as? Double
         self.name       = dictionary[Keys.Name]     as? String
@@ -112,8 +114,17 @@ class Recipe: NSObject {
             for ingredient in ingredients {
                 var newIngredient = Ingredient.init()
                 newIngredient.item      = ingredient[Keys.Item] as! String
-                newIngredient.quantity  = ingredient[Keys.Quantity] as! Double
-                newIngredient.unit      = ingredient[Keys.Unit] as! Unit
+                newIngredient.quantity  = Double(ingredient[Keys.Quantity] as! String)!
+                switch (ingredient[Keys.Unit] as! String).lowercaseString {
+                case "gram": newIngredient.unit = .Gram
+                case "kilogram": newIngredient.unit = .Kilogram
+                case "mililiter", "mililitre": newIngredient.unit = .Mililiter
+                case "liter", "litre": newIngredient.unit = .Liter
+                case "tablespoon": newIngredient.unit = .Tablespoon
+                case "teaspoon": newIngredient.unit = .Teaspoon
+                case "cup": newIngredient.unit = .Cup
+                default: newIngredient.unit = .None
+                }
                 newIngredient.note      = ingredient[Keys.Note] as? String
                 self.ingredients?.append(newIngredient)
             }
@@ -129,7 +140,17 @@ class Recipe: NSObject {
             self.nutrition?.proteins        = nutrition[Keys.Portions]      as? Double
             self.nutrition?.calories        = nutrition[Keys.Calories]      as? Double
         }
+    }
+    
+    // MARK: - Shared Instance
+    
+    class func sharedInstance() -> [Recipe] {
         
+        struct Singleton {
+            static var sharedInstance = [Recipe]()
+        }
+        
+        return Singleton.sharedInstance
     }
     
 

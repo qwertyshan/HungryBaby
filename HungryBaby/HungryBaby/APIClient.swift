@@ -26,14 +26,11 @@ class APIClient: NSObject {
     // MARK: - Firebase Data Access Methods
     
     func getRecipePackage(completionHandler: CompletionHander) {
-        print("debug in APIClient")
-
         //TODO: Get recipe package from Firebase
         let ref = Firebase(url: Constants.BASE_URL+Constants.RECIPES)
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
-            //print(snapshot)
             //TODO: Return recipe package to controller
-                return completionHandler(data: snapshot, error: nil)
+                return completionHandler(data: snapshot.value, error: nil)
             }, withCancelBlock: { error in
                 return completionHandler(data: nil, error: error)
         })
