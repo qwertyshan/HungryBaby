@@ -33,8 +33,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     // MARK: - IB Actions
     
     @IBAction func loginWithEmail(sender: UIButton) {
-        if (email.text != nil) && (password.text != nil) {
+        if (email.text != "") && (password.text != "") {
             APIClient.sharedInstance().loginWithEmail(email.text!, password: password.text!, completionHandler: loginCompletionHandler)
+        } else {
+            let error = NSError(domain: "Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Please enter email and password to login."])
+            CommonElements.showAlert(self, error: error)
         }
     }
     
@@ -46,7 +49,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     func loginCompletionHandler(data: AnyObject?, error: NSError?) -> Void {
         if (error != nil) {
-            print("Failed login with error: \(error)")
+            CommonElements.showAlert(self, error: error!)
         } else {
             print("Login successful")
             self.getDataOnLogin()
@@ -58,11 +61,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let activityIndicator = UIActivityIndicatorView()
         initActivityIndicator(activityIndicator)
         activityIndicator.startAnimating()
-        view.addSubview(activityIndicator)
+        self.view.addSubview(activityIndicator)
         
         APIClient.sharedInstance().getRecipePackage({data, error in
             if (error != nil) {
-                print(error)
+                CommonElements.showAlert(self, error: error!)
             } else {
                 for dictionary in data as! NSArray {
                     let recipe = Recipe(dictionary: dictionary as! [String : AnyObject])
@@ -70,28 +73,33 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     print(recipe.name)
                 }
                 for recipe in recipes {
-                    if let imagePath = recipe.imagePath {
-                        print(imagePath)
-                        APIClient.sharedInstance().getImage(imagePath) {data, error in
-                            if let error = error {
-                                print("Image download error: \(error.localizedDescription)")
-                            }
-                            if let data = data {
-                                print("Image download successful")
-                                // Create the image
-                                let image = UIImage(data: data as! NSData)!
-                                // Set the image in cache
-                                recipe.image = image
-                                print(recipe.image!)
+                    // Do we have the image?
+                    if recipe.image == nil {
+                        // Do we have the imagePath?
+                        if let imagePath = recipe.imagePath {
+                            print(imagePath)
+                            // Download image
+                            APIClient.sharedInstance().getImage(imagePath) {data, error in
+                                if let error = error {
+                                    print("Image download error: \(error.localizedDescription)")
+                                }
+                                if let data = data {
+                                    print("Image download successful")
+                                    // Create the image
+                                    let image = UIImage(data: data as! NSData)!
+                                    // Set the image in cache
+                                    recipe.image = image
+                                    print(recipe.image!)
+                                }
                             }
                         }
                     }
                 }
                 //let controller: UIViewController
                 //controller.recipes = recipes
-                dispatch_async(dispatch_get_main_queue()){
-                    self.stopActivityIndicator(activityIndicator)
-                }
+            }
+            dispatch_async(dispatch_get_main_queue()){
+                self.stopActivityIndicator(activityIndicator)
             }
         })
     }
