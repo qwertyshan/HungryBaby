@@ -12,6 +12,7 @@ extension APIClient {
     
     struct Constants {
         static let BASE_URL = "https://blistering-fire-6173.firebaseio.com"
+        static let IMAGE_URL = "https://blistering-fire-6173.firebaseapp.com/img/"
         static let RECIPES = "/recipes"
         static let API_KEY  = " "
         

@@ -12,7 +12,7 @@ import Firebase
 
 class APIClient: NSObject {
     
-    typealias CompletionHander = (data: AnyObject!, error: NSError?) -> Void
+    typealias CompletionHandler = (data: AnyObject!, error: NSError?) -> Void
     
     var session: NSURLSession
     var token: NSString
@@ -25,7 +25,7 @@ class APIClient: NSObject {
     
     // MARK: - Firebase Data Access Methods
     
-    func getRecipePackage(completionHandler: CompletionHander) {
+    func getRecipePackage(completionHandler: CompletionHandler) {
         //TODO: Get recipe package from Firebase
         let ref = Firebase(url: Constants.BASE_URL+Constants.RECIPES)
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
@@ -38,7 +38,7 @@ class APIClient: NSObject {
     
     // MARK: - Firebase Auth Methods
     
-    func loginWithEmail(username: String, password: String, completionHandler: CompletionHander){
+    func loginWithEmail(username: String, password: String, completionHandler: CompletionHandler){
         //TODO: Implement the following
         let ref = Firebase(url: Constants.BASE_URL)
         ref.authUser(username, password: password,
@@ -55,7 +55,7 @@ class APIClient: NSObject {
         })
     }
     
-    func loginWithGithub(accessToken: String, completionHandler: CompletionHander){
+    func loginWithGithub(accessToken: String, completionHandler: CompletionHandler){
         // TODO: Implement this
         let ref = Firebase(url: Constants.BASE_URL)
         ref.authWithOAuthProvider("github", token:accessToken,
@@ -69,7 +69,7 @@ class APIClient: NSObject {
         })
     }
     
-    func loginAnonymously(completionHandler: CompletionHander){
+    func loginAnonymously(completionHandler: CompletionHandler){
         // TODO: Implement this
         let ref = Firebase(url: Constants.BASE_URL)
         ref.authAnonymouslyWithCompletionBlock { error, authData in
@@ -86,14 +86,37 @@ class APIClient: NSObject {
     
     // MARK: - Github Method
     
-    func getGithubAccessToken(completionHandler: CompletionHander) {
+    func getGithubAccessToken(completionHandler: CompletionHandler) {
         // TODO: Get Github access token and return to controller
+        
+    }
+    
+    // MARK: - Get Image
+    
+    func getImage(imagePath: String, completionHandler: CompletionHandler) {
+        
+        let imageURL = NSURL(string: Constants.IMAGE_URL+imagePath)
+        
+        let request = NSURLRequest(URL: imageURL!)
+        
+        print("getImage --> imagePath: \(imagePath)")
+        
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            
+            if let error = downloadError {
+                completionHandler(data: nil, error: error)
+            } else {
+                completionHandler(data: data, error: nil)
+            }
+        }
+        
+        task.resume()
         
     }
     
     // MARK: - All purpose task method for data
     
-    func taskWithParameters(parameters: [String : AnyObject], completionHandler: CompletionHander) -> NSURLSessionDataTask {
+    func taskWithParameters(parameters: [String : AnyObject], completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         var mutableParameters = parameters
         
@@ -150,7 +173,7 @@ class APIClient: NSObject {
     
     // Parsing the JSON
     
-    class func parseJSONWithCompletionHandler(data: NSData, completionHandler: CompletionHander) {
+    class func parseJSONWithCompletionHandler(data: NSData, completionHandler: CompletionHandler) {
         var parsingError: NSError? = nil
         
         let parsedResult: AnyObject?

@@ -67,7 +67,25 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 for dictionary in data as! NSArray {
                     let recipe = Recipe(dictionary: dictionary as! [String : AnyObject])
                     recipes.append(recipe)
-                    //print(recipe.name)
+                    print(recipe.name)
+                }
+                for recipe in recipes {
+                    if let imagePath = recipe.imagePath {
+                        print(imagePath)
+                        APIClient.sharedInstance().getImage(imagePath) {data, error in
+                            if let error = error {
+                                print("Image download error: \(error.localizedDescription)")
+                            }
+                            if let data = data {
+                                print("Image download successful")
+                                // Create the image
+                                let image = UIImage(data: data as! NSData)!
+                                // Set the image in cache
+                                recipe.image = image
+                                print(recipe.image!)
+                            }
+                        }
+                    }
                 }
                 //let controller: UIViewController
                 //controller.recipes = recipes
