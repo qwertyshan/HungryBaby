@@ -14,18 +14,18 @@ import CoreData
 
 extension Recipe {
 
-    @NSManaged var cookTime: String?
+    @NSManaged var cookTime: NSNumber?
     @NSManaged var endAge: NSNumber?
     @NSManaged var favorite: NSNumber?
     @NSManaged var imagePath: String?
     @NSManaged var name: String?
-    @NSManaged var portions: String?
-    @NSManaged var prepTime: String?
+    @NSManaged var portions: NSNumber?
+    @NSManaged var prepTime: NSNumber?
     @NSManaged var snack: NSNumber?
     @NSManaged var startAge: NSNumber?
     @NSManaged var summary: String?
     @NSManaged var version: NSNumber?
-    @NSManaged var ingredient: NSSet?
+    @NSManaged var ingredients: NSSet?
     @NSManaged var meals: NSSet?
     @NSManaged var method: NSSet?
     @NSManaged var nutrition: Nutrition?

@@ -7,7 +7,7 @@
     </entity>
     <entity name="Configuration" representedClassName=".Configuration" syncable="YES">
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dietaryPreference" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="dietaryPreference" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="allergies" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Allergies" inverseName="configuration" inverseEntity="Allergies" syncable="YES"/>
@@ -16,8 +16,8 @@
         <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="unit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredient" inverseEntity="Recipe" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredients" inverseEntity="Recipe" syncable="YES"/>
         <relationship name="shoppingList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="items" inverseEntity="ShoppingList" syncable="YES"/>
     </entity>
     <entity name="MealEntry" representedClassName=".MealEntry" parentEntity="MealPlan" syncable="YES">
@@ -56,7 +56,7 @@
         <attribute name="startAge" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="ingredient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient" syncable="YES"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient" syncable="YES"/>
         <relationship name="meals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntry" inverseName="recipe" inverseEntity="MealEntry" syncable="YES"/>
         <relationship name="method" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MethodStep" inverseName="recipe" inverseEntity="MethodStep" syncable="YES"/>
         <relationship name="nutrition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Nutrition" inverseName="recipe" inverseEntity="Nutrition" syncable="YES"/>

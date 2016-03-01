@@ -15,7 +15,7 @@ import CoreData
 extension Configuration {
 
     @NSManaged var dateOfBirth: NSDate?
-    @NSManaged var dietaryPreference: NSNumber?
+    @NSManaged var dietaryPreference: String?
     @NSManaged var imagePath: String?
     @NSManaged var name: String?
     @NSManaged var allergies: Allergies?

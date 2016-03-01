@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension Allergies {
+class Allergies: NSManagedObject {
 
     @NSManaged var garlic: NSNumber?
     @NSManaged var peanuts: NSNumber?
