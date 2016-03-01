@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="Allergies" representedClassName=".Allergies" parentEntity="Configuration" syncable="YES">
+        <attribute name="garlic" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="peanuts" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="configuration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Configuration" inverseName="allergies" inverseEntity="Configuration" syncable="YES"/>
+    </entity>
+    <entity name="Configuration" representedClassName=".Configuration" syncable="YES">
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dietaryPreference" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="allergies" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Allergies" inverseName="configuration" inverseEntity="Allergies" syncable="YES"/>
+    </entity>
+    <entity name="Ingredient" representedClassName=".Ingredient" parentEntity="Recipe" syncable="YES">
+        <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredient" inverseEntity="Recipe" syncable="YES"/>
+        <relationship name="shoppingList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="items" inverseEntity="ShoppingList" syncable="YES"/>
+    </entity>
+    <entity name="MealEntry" representedClassName=".MealEntry" parentEntity="MealPlan" syncable="YES">
+        <attribute name="daysFromStart" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="mealPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealPlan" inverseName="mealEntry" inverseEntity="MealPlan" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="meals" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="MealPlan" representedClassName=".MealPlan" syncable="YES">
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="mealEntry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntry" inverseName="mealPlan" inverseEntity="MealEntry" syncable="YES"/>
+        <relationship name="shoppingList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="mealPlan" inverseEntity="ShoppingList" syncable="YES"/>
+    </entity>
+    <entity name="MethodStep" representedClassName=".Method" parentEntity="Recipe" syncable="YES">
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="step" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="method" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="Nutrition" representedClassName=".Nutrition" parentEntity="Recipe" syncable="YES">
+        <attribute name="calories" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="carbohydrates" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fats" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="proteins" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="nutrition" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="Recipe" representedClassName=".Recipe" syncable="YES">
+        <attribute name="cookTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endAge" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prepTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="snack" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="startAge" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="ingredient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="recipe" inverseEntity="Ingredient" syncable="YES"/>
+        <relationship name="meals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntry" inverseName="recipe" inverseEntity="MealEntry" syncable="YES"/>
+        <relationship name="method" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MethodStep" inverseName="recipe" inverseEntity="MethodStep" syncable="YES"/>
+        <relationship name="nutrition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Nutrition" inverseName="recipe" inverseEntity="Nutrition" syncable="YES"/>
+    </entity>
+    <entity name="ShoppingList" representedClassName=".ShoppingList" syncable="YES">
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="shoppingList" inverseEntity="Ingredient" syncable="YES"/>
+        <relationship name="mealPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealPlan" inverseName="shoppingList" inverseEntity="MealPlan" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Allergies" positionX="-18" positionY="27" width="128" height="90"/>
+        <element name="Configuration" positionX="0" positionY="108" width="128" height="120"/>
+        <element name="Ingredient" positionX="0" positionY="108" width="128" height="135"/>
+        <element name="MealEntry" positionX="-9" positionY="99" width="128" height="120"/>
+        <element name="MealPlan" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="MethodStep" positionX="36" positionY="126" width="128" height="90"/>
+        <element name="Nutrition" positionX="18" positionY="117" width="128" height="120"/>
+        <element name="Recipe" positionX="-63" positionY="-18" width="128" height="270"/>
+        <element name="ShoppingList" positionX="-36" positionY="9" width="128" height="90"/>
+    </elements>
+</model>

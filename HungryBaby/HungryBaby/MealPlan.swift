@@ -2,33 +2,16 @@
 //  MealPlan.swift
 //  HungryBaby
 //
-//  Created by Shantanu Rao on 2/26/16.
+//  Created by Shantanu Rao on 3/1/16.
 //  Copyright © 2016 Shantanu Rao. All rights reserved.
 //
 
 import Foundation
+import CoreData
 
-class MealPlan: NSObject {
-    enum MealType {
-        case Snack, Breakfast, Lunch, Dinner
-    }
-    
-    struct MealEntry {
-        var dayIndexFromStart: Int
-        var mealType: MealType
-        var meal: Recipe
-    }
-    
-    // MARK: - Properties
-    
-    var mealPlan: [MealEntry]
-    var startDate: NSDate
-    
-    // MARK: - Methods
-    
-    init(startDate: NSDate, mealPlan: [MealEntry]) {
-        self.startDate = startDate
-        self.mealPlan = mealPlan
-    }
-    
+
+class MealPlan: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
+
 }

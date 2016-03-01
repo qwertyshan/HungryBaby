@@ -13,7 +13,16 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    var recipes = [Recipe]()
+    let appDelegate = AppDelegate().sharedInstance() as AppDelegate
+    var recipes: [Recipe] {
+        get {
+            
+            return appDelegate.recipes
+        }
+        set {
+            appDelegate.recipes = newValue
+        }
+    }
     
     // MARK: - IB Outlets
     
@@ -59,11 +68,17 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             CommonElements.showAlert(self, error: error!)
         } else {
             print("Login successful")
-            self.getDataOnLogin()
+            if self.getDataOnLogin() == true {
+                dispatch_async(dispatch_get_main_queue()) {
+                    // Start main app
+                    self.startMainApp()
+                }
+            }
         }
     }
     
-    func getDataOnLogin() {
+    func getDataOnLogin() -> Bool {
+        var success = true
         let activityIndicator = UIActivityIndicatorView()
         initActivityIndicator(activityIndicator)
         activityIndicator.startAnimating()
@@ -71,6 +86,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         APIClient.sharedInstance().getRecipePackage({data, error in
             if (error != nil) {
+                success = false
                 CommonElements.showAlert(self, error: error!)
             } else {
                 for dictionary in data as! NSArray {
@@ -124,16 +140,17 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
-            dispatch_async(dispatch_get_main_queue()){
-                self.stopActivityIndicator(activityIndicator)
-            }
+            
         })
         
-        // Start main app
-        startMainApp()
+        dispatch_async(dispatch_get_main_queue()){
+            self.stopActivityIndicator(activityIndicator)
+        }
+        return success
     }
     
     func startMainApp() {
+        print("Segue to tab bar controller")
         performSegueWithIdentifier("TabBarSegue", sender: self)
 
     }
@@ -142,7 +159,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         if segue.identifier == "TabBarSegue" {
             let tabBarController = segue.destinationViewController as! UITabBarController
             let viewController = tabBarController.viewControllers?[0] as! RecipeListVC
-            viewController.recipes = recipes
+            //print(self.recipes.enumerate())
+            viewController.recipes = self.recipes
         }
     }
     

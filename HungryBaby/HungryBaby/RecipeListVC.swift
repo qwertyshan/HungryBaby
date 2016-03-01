@@ -12,10 +12,19 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     // MARK: - Properties
     
-    var recipes         = [Recipe]()
-    var shownRecipes    = [Recipe]()
-    var favoriteRecipes = [Recipe]()
-    var snackRecipes    = [Recipe]()
+    let appDelegate = AppDelegate().sharedInstance() as AppDelegate
+    var recipes: [Recipe] {
+        get {
+            
+            return appDelegate.recipes
+        }
+        set {
+            appDelegate.recipes = newValue
+        }
+    }
+    var shownRecipes: [Recipe] = []
+    //var favoriteRecipes = [Recipe]()
+    //var snackRecipes    = [Recipe]()
     
     // MARK: - IB Outlets
     
@@ -26,6 +35,9 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        shownRecipes = recipes
+        print(recipes.enumerate())
+        sleep(3)
         tableView.reloadData()
     }
     
@@ -38,11 +50,12 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     // MARK: - Table View Data Source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(shownRecipes.count)
         return shownRecipes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("recipeCell", forIndexPath: indexPath) as! RecipeCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
         let recipe = shownRecipes[indexPath.item] //Select meme on current row
         
         cell.cellImage.image = recipe.image

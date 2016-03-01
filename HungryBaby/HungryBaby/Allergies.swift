@@ -1,5 +1,5 @@
 //
-//  ShoppingList.swift
+//  Allergies.swift
 //  HungryBaby
 //
 //  Created by Shantanu Rao on 3/1/16.
@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class ShoppingList: NSManagedObject {
+class Allergies: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

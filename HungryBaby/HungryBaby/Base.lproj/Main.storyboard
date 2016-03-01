@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W74-Dk-EdP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2JG-D1-h1O">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -145,7 +145,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sHh-2z-HP5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sHh-2z-HP5">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="rfE-eI-3Bq">
@@ -199,11 +199,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="j9t-5L-JoL" firstAttribute="leading" secondItem="sqp-qW-DyX" secondAttribute="trailing" constant="8" id="11S-xh-aIa"/>
-                                                <constraint firstItem="Xxw-Mq-bmX" firstAttribute="leading" secondItem="n6G-fn-kkE" secondAttribute="leadingMargin" constant="66" id="2MB-ph-rPc"/>
+                                                <constraint firstItem="Xxw-Mq-bmX" firstAttribute="top" secondItem="Nyj-LE-gYz" secondAttribute="bottom" constant="-46" id="95G-KN-Biu"/>
                                                 <constraint firstItem="j9t-5L-JoL" firstAttribute="top" secondItem="n6G-fn-kkE" secondAttribute="topMargin" id="KKo-17-2Yb"/>
+                                                <constraint firstItem="Xxw-Mq-bmX" firstAttribute="leading" secondItem="Nyj-LE-gYz" secondAttribute="trailing" constant="-24" id="Six-up-Mp1"/>
                                                 <constraint firstItem="sqp-qW-DyX" firstAttribute="centerY" secondItem="n6G-fn-kkE" secondAttribute="centerY" id="eG3-ME-XQ4"/>
                                                 <constraint firstItem="j9t-5L-JoL" firstAttribute="trailing" secondItem="n6G-fn-kkE" secondAttribute="trailingMargin" constant="8" id="ohz-XZ-wyD"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Xxw-Mq-bmX" secondAttribute="bottom" constant="-5.5" id="qNZ-OP-Bdt"/>
                                                 <constraint firstItem="sqp-qW-DyX" firstAttribute="leading" secondItem="n6G-fn-kkE" secondAttribute="leadingMargin" constant="10" id="qYs-ZE-apT"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -224,7 +224,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="sHh-2z-HP5" secondAttribute="bottom" id="0nr-gI-pqp"/>
+                            <constraint firstItem="sHh-2z-HP5" firstAttribute="leading" secondItem="ybf-qY-Rhf" secondAttribute="leadingMargin" constant="-20" id="BRq-X0-HE7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sHh-2z-HP5" secondAttribute="trailing" constant="-20" id="Eil-GR-aHM"/>
+                            <constraint firstItem="sHh-2z-HP5" firstAttribute="bottom" secondItem="ybf-qY-Rhf" secondAttribute="bottomMargin" id="Yms-T3-qqE"/>
                             <constraint firstItem="sHh-2z-HP5" firstAttribute="top" secondItem="1d6-Ux-aIF" secondAttribute="bottom" id="Zhp-MB-CYa"/>
+                            <constraint firstItem="sHh-2z-HP5" firstAttribute="top" secondItem="1d6-Ux-aIF" secondAttribute="bottom" id="fuI-JN-x5b"/>
                             <constraint firstAttribute="trailing" secondItem="sHh-2z-HP5" secondAttribute="trailing" id="jzl-LK-Z31"/>
                         </constraints>
                     </view>
@@ -247,7 +251,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-57" y="-477"/>
+            <point key="canvasLocation" x="-81" y="-565"/>
         </scene>
         <!--Recipe DetailVC-->
         <scene sceneID="Za1-Jj-NQi">
@@ -342,24 +346,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CpT-NS-P7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-57" y="2271"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mkC-nw-Zyh">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="W74-Dk-EdP" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zUQ-aD-Uxk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="2JG-D1-h1O" kind="relationship" relationship="rootViewController" id="mHK-og-uv4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sFF-IE-ZbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1759" y="119"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KHV-8R-8wl">
