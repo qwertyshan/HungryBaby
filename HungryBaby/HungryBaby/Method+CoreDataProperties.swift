@@ -12,28 +12,10 @@
 import Foundation
 import CoreData
 
-class Method: NSManagedObject {
+extension Method {
 
     @NSManaged var number: NSNumber?
     @NSManaged var step: String?
     @NSManaged var recipe: Recipe?
     
-    // Standard Core Data init method
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
-    }
-    
-    // Init with dictionary
-    
-    init(recipe: Recipe, number: NSNumber, step: String, context: NSManagedObjectContext) {
-        
-        let entity =  NSEntityDescription.entityForName("Recipe", inManagedObjectContext: context)!
-        super.init(entity: entity,insertIntoManagedObjectContext: context)
-        
-        self.number     = number
-        self.step       = step
-        self.recipe     = recipe
-    }
-
-
 }

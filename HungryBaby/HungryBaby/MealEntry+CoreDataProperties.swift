@@ -15,8 +15,8 @@ import CoreData
 class MealEntry: NSManagedObject  {
 
     @NSManaged var daysFromStart: NSNumber?
-    @NSManaged var number: NSNumber?
-    @NSManaged var type: NSNumber?
+    @NSManaged var numberForDay: NSNumber?
+    @NSManaged var type: String?
     @NSManaged var mealPlan: MealPlan?
     @NSManaged var recipe: Recipe?
 

@@ -2,16 +2,30 @@
 //  Method.swift
 //  HungryBaby
 //
-//  Created by Shantanu Rao on 3/1/16.
+//  Created by Shantanu Rao on 3/2/16.
 //  Copyright © 2016 Shantanu Rao. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-
 class Method: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+    
+    // Standard Core Data init method
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+    
+    // Init with dictionary
+    
+    init(recipe: Recipe, number: NSNumber, step: String, context: NSManagedObjectContext) {
+        
+        let entity =  NSEntityDescription.entityForName("Recipe", inManagedObjectContext: context)!
+        super.init(entity: entity,insertIntoManagedObjectContext: context)
+        
+        self.number     = number
+        self.step       = step
+        self.recipe     = recipe
+    }
 }
+
