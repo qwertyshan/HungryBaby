@@ -99,7 +99,7 @@ class APIClient: NSObject {
         
         let request = NSURLRequest(URL: imageURL!)
         
-        print("getImage --> imagePath: \(imagePath)")
+        // print("getImage --> imagePath: \(imagePath)")
         
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
             

@@ -8,21 +8,19 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class LoginVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    let appDelegate = AppDelegate().sharedInstance() as AppDelegate
-    var recipes: [Recipe] {
-        get {
-            
-            return appDelegate.recipes
-        }
-        set {
-            appDelegate.recipes = newValue
-        }
+    var storedRecipes = [Recipe]()
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
     }
+    
+    let activityIndicator = UIActivityIndicatorView()
     
     // MARK: - IB Outlets
     
@@ -33,6 +31,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         email.delegate = self
         password.delegate = self
     }
@@ -63,6 +62,28 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - Helper Methods
     
+    func fetchAllRecipes() -> [Recipe] {
+        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        do {
+            return try sharedContext.executeFetchRequest(fetchRequest) as! [Recipe]
+        } catch let error as NSError {
+            print("Error in fetchAllRecipes(): \(error)")
+            return [Recipe]()
+        }
+    }
+    
+    func findRecipeWithName(name: String) -> [Recipe] {
+        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        let predicate = NSPredicate(format: "name = %@", name)
+        fetchRequest.predicate = predicate
+        do {
+            return try sharedContext.executeFetchRequest(fetchRequest) as! [Recipe]
+        } catch let error as NSError {
+            print("Error in findRecipeWithName(): \(error)")
+            return [Recipe]()
+        }
+    }
+    
     func loginCompletionHandler(data: AnyObject?, error: NSError?) -> Void {
         if (error != nil) {
             CommonElements.showAlert(self, error: error!)
@@ -79,7 +100,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     func getDataOnLogin() -> Bool {
         var success = true
-        let activityIndicator = UIActivityIndicatorView()
         initActivityIndicator(activityIndicator)
         activityIndicator.startAnimating()
         self.view.addSubview(activityIndicator)
@@ -89,34 +109,55 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 success = false
                 CommonElements.showAlert(self, error: error!)
             } else {
-                for dictionary in data as! NSArray {
-                    let recipe = Recipe(dictionary: dictionary as! [String : AnyObject])
-                    var copiedRecipeAlready = false
-                    if let i = self.recipes.indexOf({$0.name! == recipe.name}) {
-                        print("Found existing recipe: \(self.recipes[i].name!)")
-                        //print(self.recipes[i].version)
-                        if let currentVersion = self.recipes[i].version {
-                            //print(currentVersion)
-                            if currentVersion < recipe.version! as Double {
-                                recipe.favorite = self.recipes[i].favorite   // Copy current favorite status
-                                self.recipes[i] = recipe // Copy new recipe into current recipe
-                                copiedRecipeAlready = true
-                                print("Updated existing recipe: \(recipe.name!)")
+                // Load array of Recipe dictionaries
+                for dictionary in data as! [[String:AnyObject]] {
+                    
+                    var doNotUpdateRecipe = false
+                    //print("Dictionary = \(dictionary)")
+                    
+                    print("check1")
+                    // CHECK 1: Look for stored recipe with same name as downloaded recipe
+                    let searchResult = self.findRecipeWithName(dictionary[Recipe.Keys.Name] as! String)
+                    var existingRecipe: Recipe
+                    if searchResult.count > 0 {
+                        existingRecipe = searchResult[0]
+                
+                        print("Found existing recipe: \(existingRecipe.name!)")
+
+                        if let currentVersion = existingRecipe.version {
+                            
+                            // CHECK 2: Check if current version is less than downloaded version
+                            if Double(currentVersion) < Double(dictionary[Recipe.Keys.Version] as! String) {
+                                let recipeFavorite = existingRecipe.favorite  // Copy current favorite status
+                                self.sharedContext.performBlockAndWait {
+                                    self.sharedContext.deleteObject(existingRecipe)
+                                    let recipe = self.generateRecipe(dictionary)
+                                    recipe.favorite = recipeFavorite
+                                    self.saveContext()  // Save into Core Data
+                                }
+                                print("Updated existing recipe: \(dictionary[Recipe.Keys.Name] as! String)")
+                                
                             } else {
                                 print("Current version is latest.")
                             }
                         }
+                        doNotUpdateRecipe = true
                     }
-                    if copiedRecipeAlready == false {
-                        recipe.nutrition?.carbohydrates = Double(arc4random_uniform(101))
-                        recipe.nutrition?.proteins = Double(arc4random_uniform(101))
-                        recipe.nutrition?.fats = Double(arc4random_uniform(101))
-                        recipe.nutrition?.calories = Double(arc4random_uniform(101))
-                        self.recipes.append(recipe)
-                        print("Adding recipe for: \(recipe.name!)")
+                    // If downloaded recipe was not added to Core Data, add it now
+                    if doNotUpdateRecipe == false {
+
+                        self.sharedContext.performBlockAndWait {
+                            let recipe = self.generateRecipe(dictionary)
+                            self.saveContext()
+                            print(recipe)
+                        }
+                        print("Adding recipe for: \(dictionary[Recipe.Keys.Name] as! String)")
                     }
                 }
-                for recipe in self.recipes {
+                
+                // Check if we have images for all recipes in Recipe
+                // These images are cached, not stored in Core Data
+                for recipe in self.fetchAllRecipes() {
                     // Do we have the image?
                     if recipe.image == nil {
                         // Do we have the imagePath?
@@ -139,19 +180,71 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         }
                     }
                 }
+                print(self.fetchAllRecipes())
             }
             
         })
-        
-        dispatch_async(dispatch_get_main_queue()){
-            self.stopActivityIndicator(activityIndicator)
-        }
         return success
     }
     
+    func generateRecipe(dictionary: [String : AnyObject]) -> Recipe {
+        print("debug 1")
+        let recipe = Recipe(dictionary: dictionary, context: self.sharedContext)
+        
+        // Creating dummy nutrition data for recipe (will be changed later in later versions)
+        let nutrition: [String: Double] = [
+            Recipe.Keys.Carbohydrates:  Double(arc4random_uniform(101)),
+            Recipe.Keys.Proteins:       Double(arc4random_uniform(101)),
+            Recipe.Keys.Fats:           Double(arc4random_uniform(101)),
+            Recipe.Keys.Calories:       Double(arc4random_uniform(101))
+        ]
+        if let ingredients = dictionary[Recipe.Keys.Ingredients] as? [[String : AnyObject]] {
+            recipe.ingredients = NSOrderedSet(array: self.generateIngredients(recipe, dictionary: ingredients))
+            //print(recipe.ingredients)
+        }
+        if let method = dictionary[Recipe.Keys.Method] as? [String]{
+            recipe.method = NSOrderedSet(array: self.generateMethod(recipe, array: method))
+            //print(recipe.method)
+        }
+        recipe.nutrition = self.generateNutrition(recipe, dictionary: nutrition)
+        //print(recipe.nutrition)
+        
+        return recipe
+    }
+    
+    func generateIngredients(recipe: Recipe, dictionary: [[String : AnyObject]]) -> [Ingredient] {
+        print("debug 2")
+        var ingredients = [Ingredient]()
+        for ingredient in dictionary {
+            ingredients.append(Ingredient(recipe: recipe, dictionary: ingredient, context: sharedContext))
+        }
+        return ingredients
+    }
+    
+    func generateMethod(recipe: Recipe, array: [String]) -> [MethodStep] {
+        print("debug 3")
+        var methodArray = [MethodStep]()
+        var stepNumber = 1
+        for step in array {
+            methodArray.append(MethodStep(recipe: recipe, number: stepNumber, step: step, context: sharedContext))
+            stepNumber++
+        }
+        return methodArray
+    }
+    
+    func generateNutrition(recipe: Recipe, dictionary: [String : Double]) -> Nutrition {
+        print("debug 4")
+        let nutrition = Nutrition(recipe: recipe, dictionary: dictionary, context: sharedContext)
+        return nutrition
+    }
+    
     func startMainApp() {
+        //print(fetchAllRecipes())
+        dispatch_async(dispatch_get_main_queue()){
+            self.stopActivityIndicator(self.activityIndicator)
+        }
         print("Segue to tab bar controller")
-        performSegueWithIdentifier("TabBarSegue", sender: self)
+        //performSegueWithIdentifier("TabBarSegue", sender: self)
 
     }
     
@@ -160,7 +253,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             let tabBarController = segue.destinationViewController as! UITabBarController
             let viewController = tabBarController.viewControllers?[0] as! RecipeListVC
             //print(self.recipes.enumerate())
-            viewController.recipes = self.recipes
+            //viewController.storedRecipes = self.recipes
         }
     }
     
@@ -214,6 +307,15 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
+    }
+    
+    //MARK: - Save Managed Object Context helper
+    func saveContext() {
+        do {
+            try self.sharedContext.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
     }
 
 }
