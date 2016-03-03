@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class Method: NSManagedObject {
+class MethodStep: NSManagedObject {
     
     // Standard Core Data init method
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
@@ -20,8 +20,8 @@ class Method: NSManagedObject {
     
     init(recipe: Recipe, number: NSNumber, step: String, context: NSManagedObjectContext) {
         
-        let entity =  NSEntityDescription.entityForName("Recipe", inManagedObjectContext: context)!
-        super.init(entity: entity,insertIntoManagedObjectContext: context)
+        let entity =  NSEntityDescription.entityForName("MethodStep", inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
         
         self.number     = number
         self.step       = step

@@ -15,10 +15,6 @@ class Recipe: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
-    var sharedContext: NSManagedObjectContext {
-        return CoreDataStackManager.sharedInstance().managedObjectContext
-    }
-    
     struct Keys {
         static let Favorite = "favorite"
         static let Version = "version"
@@ -89,21 +85,6 @@ class Recipe: NSManagedObject {
         self.snack      = dictionary[Keys.Snack]    as? Bool
         self.startAge   = dictionary[Keys.StartAge] as? Int
         self.endAge     = dictionary[Keys.EndAge]   as? Int
-        if let ingredients = dictionary[Keys.Ingredients] as? [[String: AnyObject]] {
-            for ingredient in ingredients {
-                self.ingredients!.setByAddingObject(Ingredient(recipe: self, dictionary: ingredient, context: sharedContext))
-            }
-        }
-        if let method = dictionary[Keys.Method] as? [String] {
-            var stepNumber = 0
-            for step in method {
-                self.method!.setByAddingObject(Method(recipe: self, number: stepNumber, step: step, context: sharedContext))
-                stepNumber++
-            }
-        }
-        if let nutrition = dictionary[Keys.Nutrition] as? [String : AnyObject] {            
-            self.nutrition = Nutrition(recipe: self, dictionary: nutrition, context: sharedContext)
-        }
     }
     
     init(context: NSManagedObjectContext) {

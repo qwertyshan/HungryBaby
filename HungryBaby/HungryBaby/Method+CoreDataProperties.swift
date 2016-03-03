@@ -2,7 +2,7 @@
 //  Method+CoreDataProperties.swift
 //  HungryBaby
 //
-//  Created by Shantanu Rao on 3/1/16.
+//  Created by Shantanu Rao on 3/2/16.
 //  Copyright © 2016 Shantanu Rao. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,10 +12,10 @@
 import Foundation
 import CoreData
 
-extension Method {
+extension MethodStep {
 
     @NSManaged var number: NSNumber?
     @NSManaged var step: String?
     @NSManaged var recipe: Recipe?
-    
+
 }

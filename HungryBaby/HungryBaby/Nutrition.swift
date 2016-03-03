@@ -20,7 +20,7 @@ class Nutrition: NSManagedObject {
     
     init(recipe: Recipe, dictionary: [String : AnyObject], context: NSManagedObjectContext) {
         
-        let entity =  NSEntityDescription.entityForName("Recipe", inManagedObjectContext: context)!
+        let entity =  NSEntityDescription.entityForName("Nutrition", inManagedObjectContext: context)!
         super.init(entity: entity,insertIntoManagedObjectContext: context)
         
         self.carbohydrates  = dictionary[Recipe.Keys.Carbohydrates] as? Double
