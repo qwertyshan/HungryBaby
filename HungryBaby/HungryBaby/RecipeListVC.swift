@@ -12,17 +12,8 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     // MARK: - Properties
     
-    let appDelegate = AppDelegate().sharedInstance() as AppDelegate
-    var recipes: [Recipe] {
-        get {
-            
-            return appDelegate.recipes
-        }
-        set {
-            appDelegate.recipes = newValue
-        }
-    }
-    var shownRecipes: [Recipe] = []
+    var recipes = [Recipe]()
+    var shownRecipes = [Recipe]()
     //var favoriteRecipes = [Recipe]()
     //var snackRecipes    = [Recipe]()
     
