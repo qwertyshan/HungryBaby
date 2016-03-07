@@ -30,7 +30,7 @@ class APIClient: NSObject {
         let ref = Firebase(url: Constants.BASE_URL+Constants.RECIPES)
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             //TODO: Return recipe package to controller
-                return completionHandler(data: snapshot.value, error: nil)
+                return completionHandler(data: snapshot.value!, error: nil)
             }, withCancelBlock: { error in
                 return completionHandler(data: nil, error: error)
         })

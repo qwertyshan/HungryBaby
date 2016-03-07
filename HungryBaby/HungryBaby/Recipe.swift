@@ -74,17 +74,25 @@ class Recipe: NSManagedObject {
         let entity =  NSEntityDescription.entityForName("Recipe", inManagedObjectContext: context)!
         super.init(entity: entity,insertIntoManagedObjectContext: context)
         
-        self.favorite   = dictionary[Keys.Favorite] as? Bool
+        if let fav = (dictionary[Keys.Favorite] as? String) {
+            self.favorite   = fav.lowercaseString == "true"
+        } else {
+            self.favorite   = false
+        }
+        if let snack = (dictionary[Keys.Snack] as? String) {
+            self.snack   = snack.lowercaseString == "true"
+        } else {
+            self.snack   = false
+        }
         self.version    = Double((dictionary[Keys.Version]  as? String)!)
         self.name       = dictionary[Keys.Name]     as? String
         self.summary    = dictionary[Keys.Summary]  as? String
         self.imagePath  = dictionary[Keys.ImagePath] as? String
-        self.prepTime   = dictionary[Keys.PrepTime] as? Int
-        self.cookTime   = dictionary[Keys.CookTime] as? Int
-        self.portions   = dictionary[Keys.Portions] as? Int
-        self.snack      = dictionary[Keys.Snack]    as? Bool
-        self.startAge   = dictionary[Keys.StartAge] as? Int
-        self.endAge     = dictionary[Keys.EndAge]   as? Int
+        self.prepTime   = Int((dictionary[Keys.PrepTime] as? String)!)
+        self.cookTime   = Int((dictionary[Keys.CookTime] as? String)!)
+        self.portions   = Int((dictionary[Keys.Portions] as? String)!)
+        self.startAge   = Int((dictionary[Keys.StartAge] as? String)!)
+        self.endAge     = Int((dictionary[Keys.EndAge]   as? String)!)
     }
     
     init(context: NSManagedObjectContext) {

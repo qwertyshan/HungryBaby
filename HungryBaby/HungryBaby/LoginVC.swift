@@ -113,9 +113,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 for dictionary in data as! [[String:AnyObject]] {
                     
                     var doNotUpdateRecipe = false
-                    //print("Dictionary = \(dictionary)")
                     
-                    print("check1")
                     // CHECK 1: Look for stored recipe with same name as downloaded recipe
                     let searchResult = self.findRecipeWithName(dictionary[Recipe.Keys.Name] as! String)
                     var existingRecipe: Recipe
@@ -155,32 +153,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     }
                 }
                 
-                // Check if we have images for all recipes in Recipe
-                // These images are cached, not stored in Core Data
-                for recipe in self.fetchAllRecipes() {
-                    // Do we have the image?
-                    if recipe.image == nil {
-                        // Do we have the imagePath?
-                        if let imagePath = recipe.imagePath {
-                            print(imagePath)
-                            // Download image
-                            APIClient.sharedInstance().getImage(imagePath) {data, error in
-                                if let error = error {
-                                    print("Image download error: \(error.localizedDescription)")
-                                }
-                                if let data = data {
-                                    print("Image download successful")
-                                    // Create the image
-                                    let image = UIImage(data: data as! NSData)!
-                                    // Set the image in cache
-                                    recipe.image = image
-                                    print(recipe.image!)
-                                }
-                            }
-                        }
-                    }
-                }
-                print(self.fetchAllRecipes())
+                self.setImages() // Set images for all recipes
+                //print(self.fetchAllRecipes())
             }
             
         })
@@ -188,7 +162,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func generateRecipe(dictionary: [String : AnyObject]) -> Recipe {
-        print("debug 1")
+        //print("debug 1")
         let recipe = Recipe(dictionary: dictionary, context: self.sharedContext)
         
         // Creating dummy nutrition data for recipe (will be changed later in later versions)
@@ -213,7 +187,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func generateIngredients(recipe: Recipe, dictionary: [[String : AnyObject]]) -> [Ingredient] {
-        print("debug 2")
+        //print("debug 2")
         var ingredients = [Ingredient]()
         for ingredient in dictionary {
             ingredients.append(Ingredient(recipe: recipe, dictionary: ingredient, context: sharedContext))
@@ -222,7 +196,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func generateMethod(recipe: Recipe, array: [String]) -> [MethodStep] {
-        print("debug 3")
+        //print("debug 3")
         var methodArray = [MethodStep]()
         var stepNumber = 1
         for step in array {
@@ -233,9 +207,37 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func generateNutrition(recipe: Recipe, dictionary: [String : Double]) -> Nutrition {
-        print("debug 4")
+        //print("debug 4")
         let nutrition = Nutrition(recipe: recipe, dictionary: dictionary, context: sharedContext)
         return nutrition
+    }
+    
+    func setImages() {
+        // Check if we have images for all recipes in Recipe
+        // These images are cached, not stored in Core Data
+        for recipe in self.fetchAllRecipes() {
+            // Do we have the image?
+            if recipe.image == nil {
+                // Do we have the imagePath?
+                if let imagePath = recipe.imagePath {
+                    print(imagePath)
+                    // Download image
+                    APIClient.sharedInstance().getImage(imagePath) {data, error in
+                        if let error = error {
+                            print("Image download error: \(error.localizedDescription)")
+                        }
+                        if let data = data {
+                            print("Image download successful")
+                            // Create the image
+                            let image = UIImage(data: data as! NSData)!
+                            // Set the image in cache
+                            recipe.image = image
+                            print(recipe.image!)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func startMainApp() {
