@@ -57,6 +57,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginAnonymously(sender: UIButton) {
+        //getDataOnLogin()
         APIClient.sharedInstance().loginAnonymously(loginCompletionHandler)
     }
     
@@ -105,12 +106,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         self.view.addSubview(activityIndicator)
         
         APIClient.sharedInstance().getRecipePackage({data, error in
+        //APIClient.sharedInstance().taskWithParameters({data, error in
             if (error != nil) {
                 success = false
                 CommonElements.showAlert(self, error: error!)
             } else {
                 // Load array of Recipe dictionaries
-                for dictionary in data as! [[String:AnyObject]] {
+                let data = data.copy() as! [[String:AnyObject]]
+                for dictionary in data {
                     
                     var doNotUpdateRecipe = false
                     
@@ -127,12 +130,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                             // CHECK 2: Check if current version is less than downloaded version
                             if Double(currentVersion) < Double(dictionary[Recipe.Keys.Version] as! String) {
                                 let recipeFavorite = existingRecipe.favorite  // Copy current favorite status
-                                self.sharedContext.performBlockAndWait {
+                                //self.sharedContext.performBlockAndWait {
                                     self.sharedContext.deleteObject(existingRecipe)
                                     let recipe = self.generateRecipe(dictionary)
                                     recipe.favorite = recipeFavorite
-                                    self.saveContext()  // Save into Core Data
-                                }
+                                    //self.saveContext()  // Save into Core Data
+                                //}
                                 print("Updated existing recipe: \(dictionary[Recipe.Keys.Name] as! String)")
                                 
                             } else {
@@ -144,20 +147,24 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     // If downloaded recipe was not added to Core Data, add it now
                     if doNotUpdateRecipe == false {
 
-                        self.sharedContext.performBlockAndWait {
+                        //self.sharedContext.performBlockAndWait {
                             let recipe = self.generateRecipe(dictionary)
-                            self.saveContext()
+                            //self.saveContext()
                             print(recipe)
-                        }
+                        //}
                         print("Adding recipe for: \(dictionary[Recipe.Keys.Name] as! String)")
                     }
                 }
                 
+                //self.sharedContext.performBlockAndWait {
+                    self.saveContext()
+                //}
                 self.setImages() // Set images for all recipes
                 //print(self.fetchAllRecipes())
             }
             
         })
+        //task.resume()
         return success
     }
     
@@ -173,12 +180,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             Recipe.Keys.Calories:       Double(arc4random_uniform(101))
         ]
         if let ingredients = dictionary[Recipe.Keys.Ingredients] as? [[String : AnyObject]] {
-            recipe.ingredients = NSOrderedSet(array: self.generateIngredients(recipe, dictionary: ingredients))
+            //recipe.ingredients = NSOrderedSet(array: self.generateIngredients(recipe, dictionary: ingredients))
             //print(recipe.ingredients)
+            self.generateIngredients(recipe, dictionary: ingredients)
         }
         if let method = dictionary[Recipe.Keys.Method] as? [String]{
-            recipe.method = NSOrderedSet(array: self.generateMethod(recipe, array: method))
+            //recipe.method = NSOrderedSet(array: self.generateMethod(recipe, array: method))
             //print(recipe.method)
+            self.generateMethod(recipe, array: method)
         }
         recipe.nutrition = self.generateNutrition(recipe, dictionary: nutrition)
         //print(recipe.nutrition)
@@ -215,7 +224,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     func setImages() {
         // Check if we have images for all recipes in Recipe
         // These images are cached, not stored in Core Data
-        for recipe in self.fetchAllRecipes() {
+        let recipes = fetchAllRecipes()
+        for recipe in recipes {
             // Do we have the image?
             if recipe.image == nil {
                 // Do we have the imagePath?

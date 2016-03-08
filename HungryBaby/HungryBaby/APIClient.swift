@@ -116,14 +116,14 @@ class APIClient: NSObject {
     
     // MARK: - All purpose task method for data
     
-    func taskWithParameters(parameters: [String : AnyObject], completionHandler: CompletionHandler) -> NSURLSessionDataTask {
+    func taskWithParameters(completionHandler: CompletionHandler) -> Void {
         
-        var mutableParameters = parameters
+        //var mutableParameters = parameters
         
         // Add in the API Key
-        mutableParameters["api-key"] = Constants.API_KEY
+        //mutableParameters["api-key"] = Constants.API_KEY
         
-        let urlString = Constants.BASE_URL + APIClient.escapedParameters(mutableParameters)
+        let urlString = Constants.BASE_URL+Constants.RECIPES+".json"
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
         
@@ -163,7 +163,7 @@ class APIClient: NSObject {
         
         task.resume()
         
-        return task
+        //return task
     }
     
     
