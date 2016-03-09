@@ -256,7 +256,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             self.stopActivityIndicator(self.activityIndicator)
         }
         print("Segue to tab bar controller")
-        //performSegueWithIdentifier("TabBarSegue", sender: self)
+        performSegueWithIdentifier("TabBarSegue", sender: self)
 
     }
     

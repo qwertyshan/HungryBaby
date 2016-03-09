@@ -7,15 +7,34 @@
 //
 
 import UIKit
+import CoreData
 
-class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
-    var recipes = [Recipe]()
-    var shownRecipes = [Recipe]()
-    //var favoriteRecipes = [Recipe]()
-    //var snackRecipes    = [Recipe]()
+    //var recipes = [Recipe]()
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
+    // Fetched Results Controller
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+            managedObjectContext: self.sharedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        return fetchedResultsController
+        
+    }()
     
     // MARK: - IB Outlets
     
@@ -26,9 +45,6 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        shownRecipes = recipes
-        print(recipes.enumerate())
-        sleep(3)
         tableView.reloadData()
     }
     
@@ -36,18 +52,23 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {}
+        
+        fetchedResultsController.delegate = self
     }
     
     // MARK: - Table View Data Source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(shownRecipes.count)
-        return shownRecipes.count
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
-        let recipe = shownRecipes[indexPath.item] //Select meme on current row
+        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
         
         cell.cellImage.image = recipe.image
         cell.cellText.text = recipe.name
@@ -62,7 +83,8 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        print("Selected recipe: \(shownRecipes[indexPath.item].name)")
+        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+        print("Selected recipe: \(recipe.name)")
     }
     
     // MARK: - Navigation
@@ -71,7 +93,7 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if segue.identifier == "RecipeDetailSegue" {
             if let detailController = segue.destinationViewController as? RecipeDetailVC {
                 if let indexPath = tableView.indexPathForSelectedRow {
-                    detailController.recipe = shownRecipes[indexPath.item]
+                    detailController.recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
                     detailController.recipeIndex = indexPath.row
                 }
             }
