@@ -25,9 +25,9 @@ extension Recipe {
     @NSManaged var startAge: NSNumber?
     @NSManaged var summary: String?
     @NSManaged var version: NSNumber?
-    @NSManaged var ingredients: NSOrderedSet?
+    @NSManaged var ingredients: [Ingredient]?
     @NSManaged var meals: NSSet?
-    @NSManaged var method: NSOrderedSet?
+    @NSManaged var method: [MethodStep]?
     @NSManaged var nutrition: Nutrition?
 
 }

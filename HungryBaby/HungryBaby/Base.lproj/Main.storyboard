@@ -660,6 +660,9 @@ the milk (or yogurt).</string>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="iaS-e7-1FG" id="GxP-8j-3nf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XbB-dX-zqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
