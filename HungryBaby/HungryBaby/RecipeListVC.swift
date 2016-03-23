@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+//@IBDesignable
+
 class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
@@ -93,8 +95,8 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if segue.identifier == "RecipeDetailSegue" {
             if let detailController = segue.destinationViewController as? RecipeDetailVC {
                 if let indexPath = tableView.indexPathForSelectedRow {
-                    detailController.recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
-                    detailController.recipeIndex = indexPath.row
+                    //detailController.recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+                    //detailController.recipeIndex = indexPath.row
                 }
             }
         }

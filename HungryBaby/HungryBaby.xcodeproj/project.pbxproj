@@ -124,19 +124,19 @@
 				8FB9AE231C8231F900B855C0 /* LoginVC.swift */,
 				8FBABB891C83CB910077633F /* CommonElements.swift */,
 				8FB9AE081C7FC21C00B855C0 /* RecipeListVC.swift */,
-				8FBABB8B1C84E1260077633F /* RecipeCell.swift */,
 				8FB9AE1B1C80FAD200B855C0 /* RecipeDetailVC.swift */,
 				8FB9AE131C80FA9000B855C0 /* MealPlanVC.swift */,
 				8FB9AE151C80FAA100B855C0 /* ShoppingListVC.swift */,
 				8FB9AE171C80FAB200B855C0 /* NutritionVC.swift */,
 				8FB9AE191C80FABE00B855C0 /* Settings.swift */,
+				8FBABB8B1C84E1260077633F /* RecipeCell.swift */,
 				8F15A9941C7F8A8A0009AA9E /* Main.storyboard */,
-				8F15A9971C7F8A8A0009AA9E /* Assets.xcassets */,
 				8F15A9991C7F8A8A0009AA9E /* LaunchScreen.storyboard */,
 				8F15A99C1C7F8A8A0009AA9E /* Info.plist */,
 				8F15A98E1C7F8A8A0009AA9E /* AppDelegate.swift */,
 				8FBABB8F1C850E480077633F /* CoreDataStackManager.swift */,
 				8FBABB911C86227C0077633F /* HungryBaby.xcdatamodeld */,
+				8F15A9971C7F8A8A0009AA9E /* Assets.xcassets */,
 			);
 			path = HungryBaby;
 			sourceTree = "<group>";
