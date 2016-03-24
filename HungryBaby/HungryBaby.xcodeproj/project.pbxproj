@@ -34,14 +34,13 @@
 		8FBABC621C8650F10077633F /* Configuration+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC551C8650F10077633F /* Configuration+CoreDataProperties.swift */; };
 		8FBABC631C8650F10077633F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC561C8650F10077633F /* Configuration.swift */; };
 		8FBABC641C8650F10077633F /* MealPlan+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC571C8650F10077633F /* MealPlan+CoreDataProperties.swift */; };
-		8FBABC651C8650F10077633F /* MealPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC581C8650F10077633F /* MealPlan.swift */; };
 		8FBABC661C8650F10077633F /* Allergies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC591C8650F10077633F /* Allergies+CoreDataProperties.swift */; };
 		8FBABC671C8650F10077633F /* MealEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC5A1C8650F10077633F /* MealEntry+CoreDataProperties.swift */; };
-		8FBABC681C8650F10077633F /* Method+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC5B1C8650F10077633F /* Method+CoreDataProperties.swift */; };
 		8FBABC691C8650F10077633F /* Ingredient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC5C1C8650F10077633F /* Ingredient+CoreDataProperties.swift */; };
-		8FBABC6B1C87770D0077633F /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC6A1C87770D0077633F /* Method.swift */; };
 		8FBABC6D1C8777780077633F /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC6C1C8777780077633F /* Ingredient.swift */; };
 		8FBABC6F1C8777C20077633F /* Nutrition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBABC6E1C8777C20077633F /* Nutrition.swift */; };
+		8FC10BD31CA3A69F0049EA33 /* MethodStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC10BD11CA3A69F0049EA33 /* MethodStep+CoreDataProperties.swift */; };
+		8FC10BD41CA3A69F0049EA33 /* MethodStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC10BD21CA3A69F0049EA33 /* MethodStep.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,14 +73,13 @@
 		8FBABC551C8650F10077633F /* Configuration+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Configuration+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8FBABC561C8650F10077633F /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		8FBABC571C8650F10077633F /* MealPlan+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MealPlan+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8FBABC581C8650F10077633F /* MealPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
 		8FBABC591C8650F10077633F /* Allergies+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Allergies+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8FBABC5A1C8650F10077633F /* MealEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MealEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8FBABC5B1C8650F10077633F /* Method+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Method+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8FBABC5C1C8650F10077633F /* Ingredient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ingredient+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8FBABC6A1C87770D0077633F /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		8FBABC6C1C8777780077633F /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		8FBABC6E1C8777C20077633F /* Nutrition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nutrition.swift; sourceTree = "<group>"; };
+		8FC10BD11CA3A69F0049EA33 /* MethodStep+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MethodStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8FC10BD21CA3A69F0049EA33 /* MethodStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodStep.swift; sourceTree = "<group>"; };
 		C72E72065960AF3A6EAC0242 /* Pods_HungryBaby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryBaby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD24FB59BA18A0774975D67 /* Pods-HungryBaby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryBaby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryBaby/Pods-HungryBaby.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +142,8 @@
 		8FB9AE0A1C80F96000B855C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8FC10BD11CA3A69F0049EA33 /* MethodStep+CoreDataProperties.swift */,
+				8FC10BD21CA3A69F0049EA33 /* MethodStep.swift */,
 				8FBABC501C8650F10077633F /* ShoppingList+CoreDataProperties.swift */,
 				8FBABC511C8650F10077633F /* ShoppingList.swift */,
 				8FBABC521C8650F10077633F /* Nutrition+CoreDataProperties.swift */,
@@ -153,11 +153,8 @@
 				8FBABC551C8650F10077633F /* Configuration+CoreDataProperties.swift */,
 				8FBABC561C8650F10077633F /* Configuration.swift */,
 				8FBABC571C8650F10077633F /* MealPlan+CoreDataProperties.swift */,
-				8FBABC581C8650F10077633F /* MealPlan.swift */,
 				8FBABC591C8650F10077633F /* Allergies+CoreDataProperties.swift */,
 				8FBABC5A1C8650F10077633F /* MealEntry+CoreDataProperties.swift */,
-				8FBABC5B1C8650F10077633F /* Method+CoreDataProperties.swift */,
-				8FBABC6A1C87770D0077633F /* Method.swift */,
 				8FBABC5C1C8650F10077633F /* Ingredient+CoreDataProperties.swift */,
 				8FBABC6C1C8777780077633F /* Ingredient.swift */,
 				8FB9AE1D1C80FB0100B855C0 /* APIConstants.swift */,
@@ -302,22 +299,21 @@
 				8FB9AE091C7FC21C00B855C0 /* RecipeListVC.swift in Sources */,
 				8FBABC6D1C8777780077633F /* Ingredient.swift in Sources */,
 				8FBABC601C8650F10077633F /* Recipe+CoreDataProperties.swift in Sources */,
-				8FBABC651C8650F10077633F /* MealPlan.swift in Sources */,
 				8FBABB8C1C84E1260077633F /* RecipeCell.swift in Sources */,
+				8FC10BD31CA3A69F0049EA33 /* MethodStep+CoreDataProperties.swift in Sources */,
 				8FBABC6F1C8777C20077633F /* Nutrition.swift in Sources */,
 				8FBABB8A1C83CB910077633F /* CommonElements.swift in Sources */,
 				8FB9AE1A1C80FABE00B855C0 /* Settings.swift in Sources */,
-				8FBABC6B1C87770D0077633F /* Method.swift in Sources */,
 				8FB9AE161C80FAA100B855C0 /* ShoppingListVC.swift in Sources */,
 				8FB9AE181C80FAB200B855C0 /* NutritionVC.swift in Sources */,
 				8FBABC621C8650F10077633F /* Configuration+CoreDataProperties.swift in Sources */,
 				8FB9AE281C82426400B855C0 /* APIClient.swift in Sources */,
 				8FBABC671C8650F10077633F /* MealEntry+CoreDataProperties.swift in Sources */,
 				8FBABC631C8650F10077633F /* Configuration.swift in Sources */,
-				8FBABC681C8650F10077633F /* Method+CoreDataProperties.swift in Sources */,
 				8FBABB901C850E480077633F /* CoreDataStackManager.swift in Sources */,
 				8FBABB931C86227C0077633F /* HungryBaby.xcdatamodeld in Sources */,
 				8F15A98F1C7F8A8A0009AA9E /* AppDelegate.swift in Sources */,
+				8FC10BD41CA3A69F0049EA33 /* MethodStep.swift in Sources */,
 				8FBABC5E1C8650F10077633F /* ShoppingList.swift in Sources */,
 				8FB9AE141C80FA9000B855C0 /* MealPlanVC.swift in Sources */,
 				8FB9AE221C80FB3400B855C0 /* ImageCache.swift in Sources */,

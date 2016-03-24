@@ -260,14 +260,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "TabBarSegue" {
-            let tabBarController = segue.destinationViewController as! UITabBarController
-            let viewController = tabBarController.viewControllers?[0] as! RecipeListVC
+    //override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //if segue.identifier == "TabBarSegue" {
+            //let tabBarController = segue.destinationViewController as! UITabBarController
+            //let viewController = tabBarController.viewControllers?[0] as! RecipeListVC
             //print(self.recipes.enumerate())
             //viewController.storedRecipes = self.recipes
-        }
-    }
+        //}
+    //}
     
     func initActivityIndicator(activityIndicator: UIActivityIndicatorView) {
         // Set activity indicator

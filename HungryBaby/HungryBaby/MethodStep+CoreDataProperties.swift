@@ -1,5 +1,5 @@
 //
-//  Ingredient+CoreDataProperties.swift
+//  MethodStep+CoreDataProperties.swift
 //  HungryBaby
 //
 //  Created by Shantanu Rao on 3/23/16.
@@ -12,13 +12,10 @@
 import Foundation
 import CoreData
 
-extension Ingredient {
+extension MethodStep {
 
-    @NSManaged var item: String?
-    @NSManaged var note: String?
-    @NSManaged var quantity: NSNumber?
-    @NSManaged var unit: String?
+    @NSManaged var number: NSNumber?
+    @NSManaged var step: String?
     @NSManaged var recipe: Recipe?
-    @NSManaged var shoppingList: NSSet?
 
 }

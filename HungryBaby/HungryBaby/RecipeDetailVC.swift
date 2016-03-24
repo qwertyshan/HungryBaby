@@ -14,7 +14,9 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Properties
     
-    var recipe = Recipe()
+    var indexPath = NSIndexPath()
+    
+    //var recipe = Recipe()
     
     struct recipeSection {
         var heading : String
@@ -39,7 +41,6 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         let fetchRequest = NSFetchRequest(entityName: "Recipe")
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        fetchRequest.predicate = NSPredicate(format: "name == %@", self.recipe.name!);
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -65,6 +66,9 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300.0
+        
         do {
             try fetchedResultsController.performFetch()
         } catch {}
@@ -74,10 +78,98 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         loadedRecipe = loadRecipe()
     }
     
+    // MARK: - Table View Data Source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections
+        return 6
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows
+        return loadedRecipe[section].items.count
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if loadedRecipe[section].heading != "Header" {
+            return loadedRecipe[section].heading
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView //recast view as a UITableViewHeaderFooterView
+        header.textLabel!.textColor = UIColor.lightGrayColor()
+        header.textLabel!.font = UIFont(name: "HelveticaNeue", size: 16)
+        header.contentView.backgroundColor = UIColor(red: 254/255, green: 218/255, blue: 146/255, alpha: 1.0)
+    }
+    
+    /*func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let heading = loadedRecipe[section].heading
+        
+        // Dequeue with the reuse identifier
+        let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("SectionHeader")
+        let header = cell as! SectionHeader
+        header.sectionHeaderLabel.text = heading
+        
+        if heading != "Header" {
+            return cell
+        } else {
+            return nil
+        }
+    }*/
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let section = loadedRecipe[indexPath.section]
+        let row = section.items[indexPath.row]
+        switch section.heading {
+        case "Header":
+            let cell = tableView.dequeueReusableCellWithIdentifier("RecipeHeader", forIndexPath: indexPath) as! RecipeHeader
+            cell.recipeImage.image = (row["image"]! as! UIImage)
+            cell.nameLabel.text = (row["name"]! as! String)
+            return cell
+            
+        case "Summary":
+            let cell = tableView.dequeueReusableCellWithIdentifier("RecipeSummary", forIndexPath: indexPath) as! RecipeSummary
+            cell.summaryLabel.text = (row["summary"]! as! String)
+            return cell
+            
+        case "Numbers":
+            let cell = tableView.dequeueReusableCellWithIdentifier("RecipeNumbers", forIndexPath: indexPath) as! RecipeNumbers
+            cell.prepLabel.text = "\(row["prepTime"]!) min"
+            cell.cookLabel.text = "\(row["cookTime"]!) min"
+            cell.forAgesLabel.text = "\(row["startAge"]!) to \(row["endAge"]!)"
+            cell.makesLabel.text = "\(row["portions"]!) portions"
+            return cell
+            
+        case "Ingredients":
+            let cell = tableView.dequeueReusableCellWithIdentifier("RecipeIngredients", forIndexPath: indexPath) as! RecipeIngredients
+            cell.ingredientLabel.text = "\(row["quantity"]!) \(row["unit"]!) \(row["item"]!)"
+            return cell
+            
+        case "Method":
+            let cell = tableView.dequeueReusableCellWithIdentifier("RecipeMethod", forIndexPath: indexPath) as! RecipeMethod
+            cell.numberLabel.text = "\(row["number"]!)."
+            cell.methodStepLabel.text = (row["step"] as! String)
+            return cell
+            
+        default:
+            let cell = tableView.dequeueReusableCellWithIdentifier("RecipeNutrition", forIndexPath: indexPath) as! RecipeNutrition
+            cell.carbsLabel.text = "\(row["carbohydrates"]!) g"
+            cell.fatsLabel.text = "\(row["fats"]!) g"
+            cell.proteinsLabel.text = "\(row["proteins"]!) g"
+            cell.caloriesLabel.text = "\(row["calories"]!) cal"
+            return cell
+        }
+    }
     
     // Convenience method to load recipe into custom array
     // This allows us to use sections in the tableview
     func loadRecipe() -> [recipeSection] {
+        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+        
         // Section: Header
         let header = recipeSection(title: "Header", objects: [["image": recipe.image ?? UIImage(named: "avocado-banana-puree")!, "name": recipe.name ?? ""]])
         
@@ -94,8 +186,8 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Section: Ingredients
         var ingredientArray: [[String:AnyObject]] {
-            let result: [[String:AnyObject]]
-            let ingredients = self.recipe.ingredients! as [Ingredient]
+            var result = [[String:AnyObject]]()
+            let ingredients = recipe.ingredients?.allObjects as! [Ingredient]
             for i in ingredients {
                 let newEntry = ["item": i.item!, "note": i.note!, "quantity": Double(i.quantity!), "unit": i.unit!]
                 result.append(newEntry as! [String : AnyObject])
@@ -106,9 +198,10 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Section: Method
         var methodArray: [[String:AnyObject]] {
-            let result: [[String:AnyObject]]
-            var method = self.recipe.method! as [MethodStep]
-            method.sortInPlace { ($0.number as! Int) < ($1.number as! Int) }
+            var result = [[String:AnyObject]]()
+            print(recipe.method)
+            var method = recipe.method?.allObjects as! [MethodStep]
+            method.sortInPlace { Int($0.number!) < Int($1.number!) }
             for i in method {
                 let newEntry = ["number": Int(i.number!), "step": i.step!]
                 result.append(newEntry as! [String : AnyObject])
@@ -118,7 +211,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         let method = recipeSection(title: "Method", objects: methodArray)
         
         // Section: Nutrition
-        let nutritionEntry = self.recipe.nutrition! as Nutrition
+        let nutritionEntry = recipe.nutrition! as Nutrition
         let nutrition = recipeSection(title: "Nutrition", objects: [["carbohydrates": Double(nutritionEntry.carbohydrates!), "fats": Double(nutritionEntry.fats!), "proteins": Double(nutritionEntry.proteins!), "calories": Double(nutritionEntry.calories!)]])
         
         let result = [header, summary, numbers, ingredients, method, nutrition]

@@ -2,7 +2,7 @@
 //  ShoppingList+CoreDataProperties.swift
 //  HungryBaby
 //
-//  Created by Shantanu Rao on 3/1/16.
+//  Created by Shantanu Rao on 3/23/16.
 //  Copyright © 2016 Shantanu Rao. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

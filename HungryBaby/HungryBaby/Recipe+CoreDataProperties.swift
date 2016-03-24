@@ -2,7 +2,7 @@
 //  Recipe+CoreDataProperties.swift
 //  HungryBaby
 //
-//  Created by Shantanu Rao on 3/2/16.
+//  Created by Shantanu Rao on 3/23/16.
 //  Copyright © 2016 Shantanu Rao. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -25,9 +25,9 @@ extension Recipe {
     @NSManaged var startAge: NSNumber?
     @NSManaged var summary: String?
     @NSManaged var version: NSNumber?
-    @NSManaged var ingredients: [Ingredient]?
+    @NSManaged var ingredients: NSSet?
     @NSManaged var meals: NSSet?
-    @NSManaged var method: [MethodStep]?
+    @NSManaged var method: NSSet?
     @NSManaged var nutrition: Nutrition?
 
 }

@@ -95,7 +95,8 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if segue.identifier == "RecipeDetailSegue" {
             if let detailController = segue.destinationViewController as? RecipeDetailVC {
                 if let indexPath = tableView.indexPathForSelectedRow {
-                    detailController.recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+                    detailController.indexPath = indexPath
+                    //detailController.recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
                 }
             }
         }

@@ -25,7 +25,7 @@ class Nutrition: NSManagedObject {
         
         self.carbohydrates  = dictionary[Recipe.Keys.Carbohydrates] as? Double
         self.fats           = dictionary[Recipe.Keys.Fats]          as? Double
-        self.proteins       = dictionary[Recipe.Keys.Portions]      as? Double
+        self.proteins       = dictionary[Recipe.Keys.Proteins]      as? Double
         self.calories       = dictionary[Recipe.Keys.Calories]      as? Double
         self.recipe         = recipe
     }

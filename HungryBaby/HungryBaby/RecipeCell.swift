@@ -48,3 +48,7 @@ class RecipeNutrition: UITableViewCell {
     @IBOutlet var caloriesLabel: UILabel!
 }
 
+class SectionHeader: UITableViewHeaderFooterView {
+    @IBOutlet var sectionHeaderLabel: UILabel!
+}
+
