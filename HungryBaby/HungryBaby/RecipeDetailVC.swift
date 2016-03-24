@@ -59,6 +59,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = false
         tableView.reloadData()
     }
     
