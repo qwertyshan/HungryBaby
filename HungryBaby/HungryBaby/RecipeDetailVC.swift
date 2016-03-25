@@ -110,8 +110,8 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView //recast view as a UITableViewHeaderFooterView
-        header.textLabel!.textColor = UIColor.lightGrayColor()
-        header.textLabel!.font = UIFont(name: "HelveticaNeue", size: 16)
+        header.textLabel!.textColor = UIColor(red: 67/255, green: 71/255, blue: 77/255, alpha: 1.0)
+        header.textLabel!.font = UIFont(name: "HelveticaNeue", size: 12)
         header.contentView.backgroundColor = UIColor(red: 254/255, green: 218/255, blue: 146/255, alpha: 1.0)
     }
     

@@ -14,10 +14,10 @@ import CoreData
 
 class MealEntry: NSManagedObject {
 
-    @NSManaged var daysFromStart: NSNumber?
-    @NSManaged var numberForDay: NSNumber?
+    @NSManaged var daysFromStart: NSNumber
+    @NSManaged var numberForDay: NSNumber
     @NSManaged var type: String?
-    @NSManaged var mealPlan: MealPlan?
-    @NSManaged var recipe: Recipe?
+    @NSManaged var mealPlan: MealPlan
+    @NSManaged var recipe: Recipe
 
 }

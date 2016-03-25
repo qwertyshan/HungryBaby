@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="Allergies" representedClassName=".Allergies" parentEntity="Configuration" syncable="YES">
         <attribute name="garlic" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="peanuts" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -21,16 +21,16 @@
         <relationship name="shoppingList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="items" inverseEntity="ShoppingList" syncable="YES"/>
     </entity>
     <entity name="MealEntry" representedClassName=".MealEntry" parentEntity="MealPlan" syncable="YES">
-        <attribute name="daysFromStart" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="numberForDay" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="daysFromStart" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="numberForDay" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="mealPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealPlan" inverseName="mealEntry" inverseEntity="MealPlan" syncable="YES"/>
         <relationship name="recipe" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="meals" inverseEntity="Recipe" syncable="YES"/>
     </entity>
     <entity name="MealPlan" representedClassName=".MealPlan" syncable="YES">
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="mealEntry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntry" inverseName="mealPlan" inverseEntity="MealEntry" syncable="YES"/>
-        <relationship name="shoppingList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="mealPlan" inverseEntity="ShoppingList" syncable="YES"/>
+        <relationship name="mealEntry" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MealEntry" inverseName="mealPlan" inverseEntity="MealEntry" syncable="YES"/>
+        <relationship name="shoppingList" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ShoppingList" inverseName="mealPlan" inverseEntity="ShoppingList" syncable="YES"/>
     </entity>
     <entity name="MethodStep" representedClassName=".MethodStep" syncable="YES">
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
