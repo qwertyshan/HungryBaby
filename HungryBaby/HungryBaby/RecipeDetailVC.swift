@@ -141,7 +141,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCellWithIdentifier("RecipeNumbers", forIndexPath: indexPath) as! RecipeNumbers
             cell.prepLabel.text = "\(row["prepTime"]!) min"
             cell.cookLabel.text = "\(row["cookTime"]!) min"
-            cell.forAgesLabel.text = "\(row["startAge"]!) to \(row["endAge"]!)"
+            cell.forAgesLabel.text = "\(row["startAge"]!) to \(row["endAge"]!) months"
             cell.makesLabel.text = "\(row["portions"]!) portions"
             return cell
             
