@@ -77,6 +77,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewWillAppear(animated)
         tabBarController?.tabBar.hidden = true
         navigationController?.navigationBarHidden = false
+        navigationItem.title = loadedRecipe.first!.items[0]["name"] as? String
         favRecipe = (fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe).favorite as! Bool
         if favRecipe {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Hearts-Filled-Red"), style: .Plain, target: self, action: #selector(RecipeDetailVC.favButtonTapped))
