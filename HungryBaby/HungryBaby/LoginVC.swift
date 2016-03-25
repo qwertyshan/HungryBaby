@@ -210,7 +210,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         var stepNumber = 1
         for step in array {
             methodArray.append(MethodStep(recipe: recipe, number: stepNumber, step: step, context: sharedContext))
-            stepNumber++
+            stepNumber += 1
         }
         return methodArray
     }
@@ -298,8 +298,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     // MARK: - Keyboard notification methods
     
     func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {

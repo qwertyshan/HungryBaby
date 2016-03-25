@@ -16,7 +16,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var indexPath = NSIndexPath()
     
-    //var recipe = Recipe()
+    var favRecipe = false
     
     struct recipeSection {
         var heading : String
@@ -57,12 +57,6 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - View Setups
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = false
-        tableView.reloadData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -77,6 +71,20 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Load recipe into custom array
         loadedRecipe = loadRecipe()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.hidden = true
+        navigationController?.navigationBarHidden = false
+        favRecipe = (fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe).favorite as! Bool
+        if favRecipe {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Hearts-Filled-Red"), style: .Plain, target: self, action: #selector(RecipeDetailVC.favButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Hearts"), style: .Plain, target: self, action: #selector(RecipeDetailVC.favButtonTapped))
+        }
+
+        tableView.reloadData()
     }
     
     // MARK: - Table View Data Source
@@ -105,21 +113,6 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         header.textLabel!.font = UIFont(name: "HelveticaNeue", size: 16)
         header.contentView.backgroundColor = UIColor(red: 254/255, green: 218/255, blue: 146/255, alpha: 1.0)
     }
-    
-    /*func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let heading = loadedRecipe[section].heading
-        
-        // Dequeue with the reuse identifier
-        let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("SectionHeader")
-        let header = cell as! SectionHeader
-        header.sectionHeaderLabel.text = heading
-        
-        if heading != "Header" {
-            return cell
-        } else {
-            return nil
-        }
-    }*/
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -217,7 +210,35 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let result = [header, summary, numbers, ingredients, method, nutrition]
         
+        // Set global variable favRecipe
+        if let fav = recipe.favorite {
+            favRecipe = Bool(fav)
+        }
+        
         return result
     }
     
+    func favButtonTapped() {
+        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+        
+        if favRecipe {  // If currently favorite
+            recipe.favorite = false // make not favorite
+            saveContext()
+            navigationItem.rightBarButtonItem!.image = UIImage(named: "Hearts") // Set the button image to unfilled
+        } else {        // If currently not favorite
+            recipe.favorite = true  // make favorite
+            saveContext()
+            navigationItem.rightBarButtonItem!.image = UIImage(named: "Hearts-Filled-Red") // Set the button image to filled
+        }
+        favRecipe = recipe.favorite as! Bool
+    }
+
+    //MARK: - Save Managed Object Context helper
+    func saveContext() {
+        do {
+            try self.sharedContext.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+    }
 }
