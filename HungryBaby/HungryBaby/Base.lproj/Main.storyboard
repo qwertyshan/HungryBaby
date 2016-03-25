@@ -270,17 +270,17 @@
         <!--Recipe-->
         <scene sceneID="Za1-Jj-NQi">
             <objects>
-                <viewController storyboardIdentifier="RecipeDetailVC" title="Recipe" modalPresentationStyle="currentContext" id="ceO-0G-ydx" customClass="RecipeDetailVC" customModule="HungryBaby" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeDetailVC" title="Recipe" modalPresentationStyle="currentContext" hidesBottomBarWhenPushed="YES" id="ceO-0G-ydx" customClass="RecipeDetailVC" customModule="HungryBaby" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uu1-ze-tPf"/>
                         <viewControllerLayoutGuide type="bottom" id="zxG-N2-60J"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B9v-bo-xmX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="929"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="1" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-e7-1FG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iaS-e7-1FG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="929"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.85490196080000003" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.99607843139999996" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -628,9 +628,10 @@ the milk (or yogurt).</string>
                             <constraint firstAttribute="trailing" secondItem="iaS-e7-1FG" secondAttribute="trailing" id="wGr-DY-QTw"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="1000"/>
+                    <size key="freeformSize" width="414" height="929"/>
                     <connections>
                         <outlet property="tableView" destination="iaS-e7-1FG" id="GxP-8j-3nf"/>
                     </connections>
