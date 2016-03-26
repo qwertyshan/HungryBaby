@@ -13,7 +13,6 @@ class RecipeCell: UITableViewCell {
     @IBOutlet var cellImage: UIImageView!
     @IBOutlet var cellText: UILabel!
     @IBOutlet weak var favImage: UIImageView!
-    
 }
 
 class RecipeHeader: UITableViewCell {

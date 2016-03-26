@@ -58,6 +58,8 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         } catch {}
         fetchedMealPlanResultsController.delegate = self
         
+        sharedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -127,8 +129,8 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         cell.mealTypeLabel.text = (mealEntry.type! as String)
         
         return cell
-            
     }
+    
     
     // MARK: - Meal Plan logic
     
@@ -139,11 +141,16 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         if fetchedMealPlanResultsController.fetchedObjects?.count != 0 {
             let fetchRequest = NSFetchRequest(entityName: "MealPlan")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            
             do {
-                try sharedContext.executeRequest(deleteRequest)
-            } catch {}
+                let fetchedEntities = try sharedContext.executeFetchRequest(fetchRequest) as! [MealPlan]
+                
+                for entity in fetchedEntities {
+                    sharedContext.deleteObject(entity)
+                }
+            } catch {
+                fatalError("Failure to execute deleteRequest: \(error)")
+            }
+            saveContext()
         }
         
         // Create new meal plan
@@ -187,6 +194,8 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             tableView.hidden = false
         }
     }
+    
+    
     
     //MARK: - Save Managed Object Context helper
     func saveContext() {

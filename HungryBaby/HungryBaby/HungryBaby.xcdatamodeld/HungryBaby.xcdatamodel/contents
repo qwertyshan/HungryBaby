@@ -18,9 +18,8 @@
         <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="recipe" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredients" inverseEntity="Recipe" syncable="YES"/>
-        <relationship name="shoppingList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="items" inverseEntity="ShoppingList" syncable="YES"/>
     </entity>
-    <entity name="MealEntry" representedClassName=".MealEntry" parentEntity="MealPlan" syncable="YES">
+    <entity name="MealEntry" representedClassName=".MealEntry" syncable="YES">
         <attribute name="daysFromStart" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="numberForDay" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,7 +29,6 @@
     <entity name="MealPlan" representedClassName=".MealPlan" syncable="YES">
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="mealEntry" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MealEntry" inverseName="mealPlan" inverseEntity="MealEntry" syncable="YES"/>
-        <relationship name="shoppingList" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ShoppingList" inverseName="mealPlan" inverseEntity="ShoppingList" syncable="YES"/>
     </entity>
     <entity name="MethodStep" representedClassName=".MethodStep" syncable="YES">
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -62,19 +60,20 @@
         <relationship name="nutrition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Nutrition" inverseName="recipe" inverseEntity="Nutrition" syncable="YES"/>
     </entity>
     <entity name="ShoppingList" representedClassName=".ShoppingList" syncable="YES">
-        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="shoppingList" inverseEntity="Ingredient" syncable="YES"/>
-        <relationship name="mealPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealPlan" inverseName="shoppingList" inverseEntity="MealPlan" syncable="YES"/>
+        <attribute name="delete" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="ingredient" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Allergies" positionX="295" positionY="369" width="128" height="90"/>
         <element name="Configuration" positionX="286" positionY="189" width="128" height="118"/>
-        <element name="Ingredient" positionX="-335" positionY="-180" width="128" height="135"/>
+        <element name="Ingredient" positionX="-335" positionY="-180" width="128" height="120"/>
         <element name="MealEntry" positionX="124" positionY="-0" width="128" height="120"/>
-        <element name="MealPlan" positionX="115" positionY="-189" width="128" height="90"/>
+        <element name="MealPlan" positionX="115" positionY="-189" width="128" height="75"/>
         <element name="MethodStep" positionX="-542" positionY="36" width="128" height="90"/>
         <element name="Nutrition" positionX="-540" positionY="144" width="128" height="120"/>
         <element name="Recipe" positionX="-333" positionY="-0" width="128" height="270"/>
-        <element name="ShoppingList" positionX="-108" positionY="-180" width="128" height="90"/>
+        <element name="ShoppingList" positionX="-108" positionY="-180" width="128" height="105"/>
     </elements>
 </model>

@@ -149,17 +149,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sHh-2z-HP5">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="rfE-eI-3Bq">
-                                    <rect key="frame" x="0.0" y="64" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="qHY-Tn-b6P" id="SIR-2E-2R4"/>
-                                    </connections>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecipeCell" selectionStyle="default" showsReorderControl="YES" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="86" id="LvC-cd-Ncq" customClass="RecipeCell" customModule="HungryBaby" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="136" width="414" height="86"/>
+                                        <rect key="frame" x="0.0" y="92" width="414" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LvC-cd-Ncq" id="n6G-fn-kkE">
                                             <rect key="frame" x="0.0" y="0.0" width="381" height="86"/>
@@ -244,21 +236,10 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="searchBar" destination="rfE-eI-3Bq" id="OrZ-ux-Oao"/>
-                        <outlet property="searchDisplayController" destination="ML5-ea-cFO" id="rqb-J6-yWW"/>
                         <outlet property="tableView" destination="sHh-2z-HP5" id="GcS-5d-Kbf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNv-yw-f0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="ML5-ea-cFO">
-                    <connections>
-                        <outlet property="delegate" destination="qHY-Tn-b6P" id="bAl-VE-5Y7"/>
-                        <outlet property="searchBar" destination="rfE-eI-3Bq" id="aAn-Gb-8cY"/>
-                        <outlet property="searchContentsController" destination="qHY-Tn-b6P" id="nqF-CT-vBQ"/>
-                        <outlet property="searchResultsDataSource" destination="qHY-Tn-b6P" id="n9E-g6-7z2"/>
-                        <outlet property="searchResultsDelegate" destination="qHY-Tn-b6P" id="KH0-Ti-8Fg"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="754" y="-633"/>
         </scene>
@@ -633,7 +614,7 @@ the milk (or yogurt).</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XbB-dX-zqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1349" y="-566"/>
+            <point key="canvasLocation" x="1569" y="-257.5"/>
         </scene>
         <!--Meal Plan VC-->
         <scene sceneID="WGP-ux-hZO">
@@ -648,19 +629,19 @@ the milk (or yogurt).</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xqs-Ko-a3X">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.99607843139999996" green="0.85490196080000003" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecipeCell" selectionStyle="default" showsReorderControl="YES" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MealPlanCell" rowHeight="86" id="cIO-aL-MWE" customClass="MealPlanCell" customModule="HungryBaby" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="86"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecipeCell" selectionStyle="default" showsReorderControl="YES" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="MealPlanCell" rowHeight="86" id="cIO-aL-MWE" customClass="MealPlanCell" customModule="HungryBaby" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="414" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cIO-aL-MWE" id="Tcw-cc-td9">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avocado Banana Puree" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDB-uA-b1I">
-                                                    <rect key="frame" x="96" y="33" width="285" height="20"/>
+                                                    <rect key="frame" x="96" y="33" width="279" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -694,8 +675,8 @@ the milk (or yogurt).</string>
                                                         <constraint firstAttribute="width" constant="33" id="9L4-px-xEW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lunch" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nf-Sy-Qvk">
-                                                    <rect key="frame" x="264" y="57" width="117" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunch" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nf-Sy-Qvk">
+                                                    <rect key="frame" x="258" y="57" width="117" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="117" id="um0-26-6ar"/>
                                                     </constraints>
@@ -727,42 +708,31 @@ the milk (or yogurt).</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1GW-Hd-zDU">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                                <items>
-                                    <navigationItem title="Meal Plan" id="zs8-Ue-YJU">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1nO-zZ-E3w">
-                                            <connections>
-                                                <action selector="refreshMealPlan:" destination="xTJ-tH-M1D" id="A2H-Bl-X00"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1GW-Hd-zDU" firstAttribute="top" secondItem="Dck-8B-bMu" secondAttribute="bottom" id="DlT-bF-sSm"/>
-                            <constraint firstItem="Xqs-Ko-a3X" firstAttribute="top" secondItem="1GW-Hd-zDU" secondAttribute="bottom" id="HSn-Ce-CLg"/>
+                            <constraint firstItem="Xqs-Ko-a3X" firstAttribute="top" secondItem="stO-Hs-36l" secondAttribute="topMargin" id="74G-9L-2IW"/>
                             <constraint firstItem="Xqs-Ko-a3X" firstAttribute="leading" secondItem="stO-Hs-36l" secondAttribute="leadingMargin" constant="-20" id="Kpe-e4-ImU"/>
-                            <constraint firstItem="1GW-Hd-zDU" firstAttribute="leading" secondItem="stO-Hs-36l" secondAttribute="leadingMargin" constant="-20" id="fPM-D6-m2e"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1GW-Hd-zDU" secondAttribute="trailing" constant="-20" id="ogC-ZD-YWp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xqs-Ko-a3X" secondAttribute="trailing" constant="-20" id="rbe-UX-fR0"/>
                             <constraint firstItem="Xqs-Ko-a3X" firstAttribute="bottom" secondItem="stO-Hs-36l" secondAttribute="bottomMargin" id="tNo-kw-NHt"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Meal Plan" image="VegetarianFood" selectedImage="VegetarianFood-Filled-Blue" id="RkN-8E-OUJ">
-                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="Meal Plan" id="2mS-Ua-e3s">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="Jtc-hB-iAa">
+                            <connections>
+                                <action selector="refreshMealPlan:" destination="xTJ-tH-M1D" id="edo-be-23t"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="refreshButton" destination="1nO-zZ-E3w" id="Cxp-Kt-hzq"/>
+                        <outlet property="refreshButton" destination="Jtc-hB-iAa" id="QuY-Lm-Vgy"/>
                         <outlet property="tableView" destination="Xqs-Ko-a3X" id="d1V-gr-ffB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCI-dP-BjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="164"/>
+            <point key="canvasLocation" x="754" y="172"/>
         </scene>
         <!--Shopping List VC-->
         <scene sceneID="Y0X-gj-eh8">
@@ -773,59 +743,68 @@ the milk (or yogurt).</string>
                         <viewControllerLayoutGuide type="bottom" id="jnv-qG-6fr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ju9-ZV-aJp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqb-6Z-Nog">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Shopping List" id="C2B-Oa-Ags"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CA4-76-t5Q">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShopCell" textLabel="JNT-dK-LZ4" detailTextLabel="CCK-N8-ddF" style="IBUITableViewCellStyleValue1" id="Wwc-7K-DKg">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wwc-7K-DKg" id="IYc-xR-CuW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JNT-dK-LZ4">
+                                                    <rect key="frame" x="15" y="12" width="31.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CCK-N8-ddF">
+                                                    <rect key="frame" x="357.5" y="12" width="41.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CA4-76-t5Q" firstAttribute="leading" secondItem="ju9-ZV-aJp" secondAttribute="leadingMargin" constant="-20" id="C3x-vn-a47"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sqb-6Z-Nog" secondAttribute="trailing" constant="-20" id="DyF-To-EJE"/>
+                            <constraint firstItem="sqb-6Z-Nog" firstAttribute="leading" secondItem="ju9-ZV-aJp" secondAttribute="leadingMargin" constant="-20" id="RKD-Cj-Qpm"/>
+                            <constraint firstItem="sqb-6Z-Nog" firstAttribute="top" secondItem="Qyg-Xt-gKl" secondAttribute="bottom" id="cD7-nS-A8t"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CA4-76-t5Q" secondAttribute="trailing" constant="-20" id="vme-Zf-B0t"/>
+                            <constraint firstItem="jnv-qG-6fr" firstAttribute="top" secondItem="CA4-76-t5Q" secondAttribute="bottom" id="wK2-Gt-FM1"/>
+                            <constraint firstItem="CA4-76-t5Q" firstAttribute="top" secondItem="sqb-6Z-Nog" secondAttribute="bottom" id="zFz-pe-lTV"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="Shopping List" image="ReportCard" selectedImage="ReportCard-Filled-Blue" id="yP9-s3-eeB">
                         <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     </tabBarItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="tableView" destination="CA4-76-t5Q" id="zh6-Tx-dI2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqP-wi-XV0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-57" y="901"/>
-        </scene>
-        <!--Nutrition VC-->
-        <scene sceneID="zLm-Dm-18l">
-            <objects>
-                <viewController storyboardIdentifier="NutritionVC" title="Nutrition VC" id="MQJ-EW-xxu" customClass="NutritionVC" customModule="HungryBaby" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NQj-Tb-5hg"/>
-                        <viewControllerLayoutGuide type="bottom" id="1Rf-OQ-JoH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="As4-Cj-N6N">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="Nutrition" image="BarChart" selectedImage="BarChart-Filled-Blue" id="u9s-XQ-rGk">
-                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H6e-ac-fjW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-57" y="1579"/>
-        </scene>
-        <!--Settings VC-->
-        <scene sceneID="oWv-4R-hGX">
-            <objects>
-                <viewController storyboardIdentifier="SettingsVC" title="Settings VC" id="UQQ-fX-a37" customClass="SettingsVC" customModule="HungryBaby" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rCc-Cv-bWW"/>
-                        <viewControllerLayoutGuide type="bottom" id="x18-nk-J0L"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6lx-I7-Jf7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" tag="4" title="Settings" image="Baby" selectedImage="Baby-Filled-Blue" id="QwJ-g4-pvM">
-                        <inset key="imageInsets" minX="2" minY="2" maxX="1" maxY="2"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CpT-NS-P7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-57" y="2271"/>
+            <point key="canvasLocation" x="754" y="960"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KHV-8R-8wl">
@@ -838,10 +817,8 @@ the milk (or yogurt).</string>
                     </tabBar>
                     <connections>
                         <segue destination="h8J-RX-oIP" kind="relationship" relationship="viewControllers" id="DMU-vV-s88"/>
-                        <segue destination="xTJ-tH-M1D" kind="relationship" relationship="viewControllers" id="GLi-22-Yal"/>
+                        <segue destination="Mgc-4D-R4D" kind="relationship" relationship="viewControllers" id="GLi-22-Yal"/>
                         <segue destination="Rqw-P9-bDL" kind="relationship" relationship="viewControllers" id="qSI-Sz-MBT"/>
-                        <segue destination="MQJ-EW-xxu" kind="relationship" relationship="viewControllers" id="tOW-Gg-m8T"/>
-                        <segue destination="UQQ-fX-a37" kind="relationship" relationship="viewControllers" id="n11-hF-IMh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhW-GT-Uyl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -851,7 +828,7 @@ the milk (or yogurt).</string>
         <!--Recipes-->
         <scene sceneID="j4F-zA-asL">
             <objects>
-                <navigationController extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="currentContext" hidesBarsOnSwipe="YES" id="h8J-RX-oIP" sceneMemberID="viewController">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="currentContext" id="h8J-RX-oIP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recipes" image="ChefHat" selectedImage="ChefHat-Filled-Blue" id="rbV-0m-AgB">
                         <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                     </tabBarItem>
@@ -869,12 +846,29 @@ the milk (or yogurt).</string>
             </objects>
             <point key="canvasLocation" x="-81" y="-565"/>
         </scene>
+        <!--Meal Plan-->
+        <scene sceneID="f3e-w0-fRL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mgc-4D-R4D" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="Meal Plan" image="VegetarianFood" selectedImage="VegetarianFood-Filled-Blue" id="RkN-8E-OUJ">
+                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JeI-PZ-a4f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xTJ-tH-M1D" kind="relationship" relationship="rootViewController" id="b8w-D4-lTB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b03-DR-dd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-81" y="156"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Baby" width="33" height="33"/>
-        <image name="Baby-Filled-Blue" width="33" height="33"/>
-        <image name="BarChart" width="33" height="33"/>
-        <image name="BarChart-Filled-Blue" width="33" height="33"/>
         <image name="ChefHat" width="33" height="33"/>
         <image name="ChefHat-Filled-Blue" width="33" height="33"/>
         <image name="Hearts-Filled-Red" width="33" height="33"/>

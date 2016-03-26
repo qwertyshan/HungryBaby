@@ -41,7 +41,6 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     // MARK: - IB Outlets
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: - View Setups
     
@@ -72,7 +71,11 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
         let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
         
-        cell.cellImage.image = recipe.image
+        if let recipeImage = recipe.image {
+            cell.cellImage.image = recipeImage
+        } else {
+            cell.cellImage.image = UIImage(named: "Baby")
+        }
         cell.cellText.text = recipe.name
         if recipe.favorite == true {
             cell.favImage.image = UIImage(named: "Hearts-Filled-Red")

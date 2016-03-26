@@ -19,6 +19,5 @@ extension Ingredient {
     @NSManaged var quantity: NSNumber?
     @NSManaged var unit: String?
     @NSManaged var recipe: Recipe?
-    @NSManaged var shoppingList: NSSet?
 
 }
