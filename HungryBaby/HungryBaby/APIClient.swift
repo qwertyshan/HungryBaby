@@ -93,7 +93,7 @@ class APIClient: NSObject {
     
     // MARK: - Get Image
     
-    func getImage(imagePath: String, completionHandler: CompletionHandler) {
+    func getImage(imagePath: String, completionHandler: CompletionHandler) -> NSURLSessionTask {
         
         let imageURL = NSURL(string: Constants.IMAGE_URL+imagePath)
         
@@ -112,6 +112,7 @@ class APIClient: NSObject {
         
         task.resume()
         
+        return task
     }
     
     // MARK: - All purpose task method for data

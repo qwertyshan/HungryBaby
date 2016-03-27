@@ -71,11 +71,8 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier("RecipeCell", forIndexPath: indexPath) as! RecipeCell
         let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
         
-        if let recipeImage = recipe.image {
-            cell.cellImage.image = recipeImage
-        } else {
-            cell.cellImage.image = UIImage(named: "Baby")
-        }
+        configureCellImage(cell, atIndexPath: indexPath)
+        
         cell.cellText.text = recipe.name
         if recipe.favorite == true {
             cell.favImage.image = UIImage(named: "Hearts-Filled-Red")
@@ -87,6 +84,84 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    // MARK: - Configure Cell
+    
+    func configureCellImage(cell: RecipeCell, atIndexPath indexPath: NSIndexPath) {
+        
+        var recipeImage = UIImage()
+        var activityIndicator = UIActivityIndicatorView()
+        
+        // Set cell image to nil
+        cell.cellImage.image = nil
+        
+        // Set activity indicator
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height)
+        activityIndicator.backgroundColor = (UIColor(white: 0.2, alpha: 0.7))
+        activityIndicator.hidesWhenStopped = true
+        
+        // Load photo
+        let recipe = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+        
+        // Set the Photo Image
+        if recipe.imagePath == nil || recipe.imagePath == "" {
+            recipeImage = UIImage(named: "Baby")!
+            print("Image not available.")
+            
+        } else if recipe.image != nil {
+            recipeImage = recipe.image!
+            //print("Image retrieved from cache.")
+            
+        } else { // This is the interesting case. The photo has an image name, but it is not downloaded yet.
+            
+            // Start activity indicator
+            dispatch_async(dispatch_get_main_queue()) {
+                activityIndicator.startAnimating()
+                cell.addSubview(activityIndicator)
+            }
+            
+            // Download image
+            let task = APIClient.sharedInstance().getImage(recipe.imagePath!) {data, error in
+                if let error = error {
+                    print("Image download error: \(error.localizedDescription)")
+                    // Update the cell later, on the main thread
+                    dispatch_async(dispatch_get_main_queue()) {
+                        cell.cellImage!.image = UIImage(named: "Baby")!
+                        activityIndicator.stopAnimating()
+                        activityIndicator.removeFromSuperview()
+                    }
+                }
+                if let data = data {
+                    print("Image download successful")
+                    // Create the image
+                    recipeImage = UIImage(data: data as! NSData)!
+                    dispatch_async(dispatch_get_main_queue()) {
+                        recipe.image = recipeImage
+                    }
+                    
+                    // Update the cell later, on the main thread
+                    dispatch_async(dispatch_get_main_queue()) {
+                        cell.cellImage!.image = recipeImage
+                        activityIndicator.stopAnimating()
+                        activityIndicator.removeFromSuperview()
+                    }
+                }
+            }
+
+            cell.taskToCancelifCellIsReused = task
+        }
+        
+        cell.cellImage!.image = recipeImage
+        
+        // Stop activity indicator
+        if activityIndicator.isAnimating() {
+            dispatch_async(dispatch_get_main_queue()) {
+                activityIndicator.stopAnimating()
+                activityIndicator.removeFromSuperview()
+            }
+        }
     }
     
     // MARK: - Navigation

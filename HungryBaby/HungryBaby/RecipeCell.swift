@@ -13,6 +13,18 @@ class RecipeCell: UITableViewCell {
     @IBOutlet var cellImage: UIImageView!
     @IBOutlet var cellText: UILabel!
     @IBOutlet weak var favImage: UIImageView!
+    
+    // The property uses a property observer. Any time its
+    // value is set it canceles the previous NSURLSessionTask
+    
+    var taskToCancelifCellIsReused: NSURLSessionTask? {
+        
+        didSet {
+            if let taskToCancel = oldValue {
+                taskToCancel.cancel()
+            }
+        }
+    }
 }
 
 class RecipeHeader: UITableViewCell {
@@ -52,5 +64,17 @@ class MealPlanCell: UITableViewCell {
     @IBOutlet var cellText: UILabel!
     @IBOutlet weak var favImage: UIImageView!
     @IBOutlet var mealTypeLabel: UILabel!
+    
+    // The property uses a property observer. Any time its
+    // value is set it canceles the previous NSURLSessionTask
+    
+    var taskToCancelifCellIsReused: NSURLSessionTask? {
+        
+        didSet {
+            if let taskToCancel = oldValue {
+                taskToCancel.cancel()
+            }
+        }
+    }
     
 }

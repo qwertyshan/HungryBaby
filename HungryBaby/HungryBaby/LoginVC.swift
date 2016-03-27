@@ -57,7 +57,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginAnonymously(sender: UIButton) {
-        //getDataOnLogin()
         APIClient.sharedInstance().loginAnonymously(loginCompletionHandler)
     }
     
@@ -106,7 +105,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         self.view.addSubview(activityIndicator)
         
         APIClient.sharedInstance().getRecipePackage({data, error in
-        //APIClient.sharedInstance().taskWithParameters({data, error in
             if (error != nil) {
                 success = false
                 CommonElements.showAlert(self, error: error!)
@@ -130,12 +128,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                             // CHECK 2: Check if current version is less than downloaded version
                             if Double(currentVersion) < Double(dictionary[Recipe.Keys.Version] as! String) {
                                 let recipeFavorite = existingRecipe.favorite  // Copy current favorite status
-                                //self.sharedContext.performBlockAndWait {
-                                    self.sharedContext.deleteObject(existingRecipe)
-                                    let recipe = self.generateRecipe(dictionary)
-                                    recipe.favorite = recipeFavorite
-                                    //self.saveContext()  // Save into Core Data
-                                //}
+                                self.sharedContext.deleteObject(existingRecipe)
+                                let recipe = self.generateRecipe(dictionary)
+                                recipe.favorite = recipeFavorite
                                 print("Updated existing recipe: \(dictionary[Recipe.Keys.Name] as! String)")
                                 
                             } else {
@@ -147,24 +142,13 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     // If downloaded recipe was not added to Core Data, add it now
                     if doNotUpdateRecipe == false {
 
-                        //self.sharedContext.performBlockAndWait {
-                            let recipe = self.generateRecipe(dictionary)
-                            //self.saveContext()
-                            print(recipe)
-                        //}
+                        self.generateRecipe(dictionary)
                         print("Adding recipe for: \(dictionary[Recipe.Keys.Name] as! String)")
                     }
                 }
-                
-                //self.sharedContext.performBlockAndWait {
-                    self.saveContext()
-                //}
-                self.setImages() // Set images for all recipes
-                //print(self.fetchAllRecipes())
+                self.saveContext()
             }
-            
         })
-        
         return success
     }
     
