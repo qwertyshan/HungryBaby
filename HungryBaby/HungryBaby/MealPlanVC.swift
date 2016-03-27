@@ -18,14 +18,7 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
-    // Fetched Results Controllers
-    
-    lazy var fetchedRecipesResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest(entityName: "Recipe")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultsController
-    }()
+    // Fetched Results Controller
     
     lazy var fetchedMealPlanResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "MealEntry")
@@ -47,19 +40,12 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
-        do {
-            try fetchedRecipesResultsController.performFetch()
-        } catch {}
-        fetchedRecipesResultsController.delegate = self
-        
+
         do {
             try fetchedMealPlanResultsController.performFetch()
         } catch {}
         fetchedMealPlanResultsController.delegate = self
         
-        sharedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -131,6 +117,21 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "RecipeDetailSegue2" {
+            if let detailController = segue.destinationViewController as? RecipeDetailVC {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    detailController.objectID = fetchedMealPlanResultsController.objectAtIndexPath(indexPath).recipe.objectID
+                }
+            }
+        }
+    }
+    
     
     // MARK: - Meal Plan logic
     
@@ -158,13 +159,18 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         newMealPlan.startDate = NSDate()
                 
         // Get count of existing recipes
-        let count = UInt32(fetchedRecipesResultsController.fetchedObjects!.count)
+        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        var recipes = [Recipe]()
+        do {
+            recipes = try sharedContext.executeFetchRequest(fetchRequest) as! [Recipe]
+        } catch {}
+        let count = recipes.count
         
         for day in (0..<7) {
             for number in (0..<4) {
                 let newMealEntry = NSEntityDescription.insertNewObjectForEntityForName("MealEntry", inManagedObjectContext: sharedContext) as! MealEntry
-                let index = Int(arc4random_uniform(count))
-                let recipe = fetchedRecipesResultsController.fetchedObjects![index] as! Recipe
+                let index = Int(arc4random_uniform(UInt32(count)))
+                let recipe = recipes[index]
                 
                 newMealEntry.daysFromStart = day
                 newMealEntry.numberForDay = number
@@ -193,11 +199,83 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         if tableView.hidden == true {
             tableView.hidden = false
         }
+        
+        createShoppingList(newMealPlan)
     }
     
+    func createShoppingList(mealPlan: MealPlan) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "ShoppingList")
+        
+        do {
+            let fetchedEntities = try sharedContext.executeFetchRequest(fetchRequest) as! [ShoppingList]
+            print("Fetch count 1: \(fetchedEntities.count)")
+            
+            for entity in fetchedEntities {
+                self.sharedContext.deleteObject(entity)
+            }
+            self.saveContext()
+            
+        } catch {
+            fatalError("Failure to execute deleteRequest: \(error)")
+        }
+        
+        struct shoppingStruct {
+            var ingredient: String = ""
+            var quantity: Double = 0
+            var unit: String = ""
+        }
+        var shoppingArray = [shoppingStruct]()
+        
+        // Gather all ingredients
+        for item in mealPlan.mealEntry! {
+            for ingredient in (item as! MealEntry).recipe.ingredients! {
+                var shoppingList = shoppingStruct()
+                shoppingList.ingredient = (ingredient as! Ingredient).item!
+                shoppingList.quantity = Double((ingredient as! Ingredient).quantity!)
+                shoppingList.unit = (ingredient as! Ingredient).unit!
+                shoppingArray.append(shoppingList)
+            }
+        }
+        
+        // Sort ingredients
+        shoppingArray.sortInPlace { $0.ingredient < $1.ingredient }
+        
+        var i = 0
+        
+        // Merge common ingredients
+        while (i < shoppingArray.count-1) {
+            let current = shoppingArray[i]
+            let next = shoppingArray[i+1]
+            //print("Current: \(current.ingredient) \(current.quantity) Next: \(next.ingredient) \(next.quantity)")
+            
+            if current.ingredient == next.ingredient {
+                shoppingArray[i+1].quantity = Double(current.quantity) + Double(next.quantity)
+                //print("Merge -> Current: \(current.ingredient) \(current.quantity) Next: \(shoppingArray[i+1].ingredient) \(shoppingArray[i+1].quantity)")
+                shoppingArray.removeAtIndex(i)
+            } else {
+                i = i + 1
+                //print("No Merge")
+            }
+        }
+        
+        // Load into CoreData
+        for entry in shoppingArray {
+            let newEntry = NSEntityDescription.insertNewObjectForEntityForName("ShoppingList", inManagedObjectContext: self.sharedContext) as! ShoppingList
+            newEntry.ingredient = entry.ingredient
+            newEntry.quantity = entry.quantity
+            newEntry.unit = entry.unit
+            newEntry.delete = false
+            saveContext()
+        }
+        
+        // Deinit
+        shoppingArray = [shoppingStruct]()
+        print(shoppingArray.count)
+        
+    }
     
-    
-    //MARK: - Save Managed Object Context helper
+    // Save Managed Object Context helper
     func saveContext() {
         do {
             try self.sharedContext.save()

@@ -30,14 +30,6 @@ class ShoppingListVC: UIViewController, UITableViewDataSource, UITableViewDelega
         return fetchedResultsController
     }()
     
-    lazy var fetchedMealPlanResultsController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest(entityName: "MealPlan")
-        let sort = NSSortDescriptor(key: "startDate", ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultsController
-    }()
-    
     // MARK: - IB Outlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -48,32 +40,35 @@ class ShoppingListVC: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
         do {
             try fetchedResultsController.performFetch()
         } catch {}
         fetchedResultsController.delegate = self
         
-        do {
-            try fetchedMealPlanResultsController.performFetch()
-        } catch {}
-        fetchedMealPlanResultsController.delegate = self
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print(fetchedMealPlanResultsController.fetchedObjects!.count)
-        if fetchedMealPlanResultsController.fetchedObjects!.count == 0 {
+        
+        // Get count of current Meal Plans
+        var count = Int()
+        do {
+            count = try sharedContext.executeFetchRequest(NSFetchRequest(entityName: "MealPlan")).count
+        } catch {}
+        
+        // If no meal plan exists, hide table
+        if count == 0 {
             tableView.hidden = true
-        } else {
-            createShoppingList()
+        }
+        // Else, restart fetchedResultsController and reload table data
+        else {
+            do {
+                try fetchedResultsController.performFetch()
+            } catch {}
+            tableView.reloadData()
+            tableView.hidden = false
         }
     }
-    
-    // MARK: - IB Actions
-    
-    
     
     // MARK: - Table View Data Source
     
@@ -86,11 +81,31 @@ class ShoppingListVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        //print(indexPath)
         let shoplist = fetchedResultsController.objectAtIndexPath(indexPath) as! ShoppingList
+        var string1: String
+        var quantity: String
+        var unit: String
         
-        let string1 = shoplist.ingredient!
-        let string2 = String(shoplist.quantity!) + " " + shoplist.unit!
+        //print(shoplist)
+        
+        if let ingredient = shoplist.ingredient {
+            string1 = ingredient
+        } else {
+            string1 = ""
+        }
+        if let quantityX = shoplist.quantity {
+            quantity = String(quantityX)
+        } else {
+            quantity = ""
+        }
+        if let unitX = shoplist.unit {
+            unit = unitX
+        } else {
+            unit = ""
+        }
+        
+        let string2 = quantity + " " + unit
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ShopCell", forIndexPath: indexPath)
         cell.textLabel?.text = string1
@@ -133,170 +148,24 @@ class ShoppingListVC: UIViewController, UITableViewDataSource, UITableViewDelega
             return [delete]
         }
     }
-    /*
-    
-    // MARK: - Fetched Results Controller Delegate
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController,
-                    didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
-                                     atIndex sectionIndex: Int,
-                                             forChangeType type: NSFetchedResultsChangeType) {
-        
-        switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            
-        default:
-            return
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController,
-                    didChangeObject anObject: AnyObject,
-                                    atIndexPath indexPath: NSIndexPath?,
-                                                forChangeType type: NSFetchedResultsChangeType,
-                                                              newIndexPath: NSIndexPath?) {
-        
-        switch type {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            
-        case .Update:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Left)
-            tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Right)
-            
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        }
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
-    }
  
-    */
     // MARK: - Convenience methods
     
     // Delete entry
     func deleteShoppingListEntry(indexPath: NSIndexPath) {
-        let shoplist = fetchedResultsController.objectAtIndexPath(indexPath) as! ShoppingList
+        //print("in deleteShoppingListEntry()")
+        let shoplist = self.fetchedResultsController.objectAtIndexPath(indexPath) as! ShoppingList
         if shoplist.delete == true {
             shoplist.setValue(false, forKey: "delete")
         } else {
             shoplist.setValue(true, forKey: "delete")
         }
-        saveContext()
-        //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
-        print(shoplist)
+        self.saveContext()
+        //print(shoplist)
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
     }
     
-    func createShoppingList() {
-        
-        
-        let objectID = fetchedMealPlanResultsController.fetchedObjects?.first!.objectID
-        
-        // If the meal plan has already been parsed (we have the objectID), exit
-        if mealPlanObjectID == fetchedMealPlanResultsController.fetchedObjects?.first!.objectID {
-            print("Meal plan is current")
-            return
-        }
-        
-        // else
-        let mealPlan = sharedContext.objectWithID(objectID!) as! MealPlan
-        print("New meal plan with ID: \(objectID). Old ID was: \(mealPlanObjectID)")
-        mealPlanObjectID = objectID
-        
-        print("Fetch count 1: \(fetchedResultsController.fetchedObjects!.count)")
-        
-        let fetchRequest = NSFetchRequest(entityName: "ShoppingList")
-        do {
-            let fetchedEntities = try sharedContext.executeFetchRequest(fetchRequest) as! [ShoppingList]
-            
-            for entity in fetchedEntities {
-                sharedContext.deleteObject(entity)
-                saveContext()
-            }
-        } catch {
-            fatalError("Failure to execute deleteRequest: \(error)")
-        }
-        
-        
-        print("Fetch count 2: \(fetchedResultsController.fetchedObjects!.count)")
-        
-       
-        
-        struct shoppingStruct {
-            var ingredient: String = ""
-            var quantity: Double = 0
-            var unit: String = ""
-        }
-        var shoppingArray = [shoppingStruct]()
-        
-        // Gather all ingredients
-        for item in mealPlan.mealEntry! {
-            for ingredient in (item as! MealEntry).recipe.ingredients! {
-                var shoppingList = shoppingStruct()
-                shoppingList.ingredient = (ingredient as! Ingredient).item!
-                shoppingList.quantity = Double((ingredient as! Ingredient).quantity!)
-                shoppingList.unit = (ingredient as! Ingredient).unit!
-                shoppingArray.append(shoppingList)
-            }
-        }
-        
-        // Sort ingredients
-        shoppingArray.sortInPlace { $0.ingredient < $1.ingredient }
-        
-        var i = 0
-        
-        // Merge common ingredients
-        while (i < shoppingArray.count-1) {
-            let current = shoppingArray[i]
-            let next = shoppingArray[i+1]
-            //print("Current: \(current.ingredient) \(current.quantity) Next: \(next.ingredient) \(next.quantity)")
-            
-            if current.ingredient == next.ingredient {
-                shoppingArray[i+1].quantity = Double(current.quantity) + Double(next.quantity)
-                //print("Merge -> Current: \(current.ingredient) \(current.quantity) Next: \(shoppingArray[i+1].ingredient) \(shoppingArray[i+1].quantity)")
-                shoppingArray.removeAtIndex(i)
-            } else {
-                i = i + 1
-                //print("No Merge")
-            }
-        }
-        
-        // Load into CoreData
-        for entry in shoppingArray {
-            let newEntry = NSEntityDescription.insertNewObjectForEntityForName("ShoppingList", inManagedObjectContext: sharedContext) as! ShoppingList
-            newEntry.ingredient = entry.ingredient
-            newEntry.quantity = entry.quantity
-            newEntry.unit = entry.unit
-            newEntry.delete = false
-            saveContext()
-        }
-        
-        print("Fetch count 3: \(fetchedResultsController.fetchedObjects!.count)")
-
-        // Deinit
-        shoppingArray = [shoppingStruct]()
-        print(shoppingArray.count)
-        
-        tableView.reloadData()
-        tableView.hidden = false
-        
-    }
-    
-    //MARK: - Save Managed Object Context helper
+    //Save Managed Object Context helper
     func saveContext() {
         do {
             try self.sharedContext.save()

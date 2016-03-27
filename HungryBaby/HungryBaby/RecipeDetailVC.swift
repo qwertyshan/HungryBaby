@@ -14,7 +14,10 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Properties
     
-    var indexPath = NSIndexPath()
+    var objectID = NSManagedObjectID()
+    var recipe: Recipe {
+            return try! sharedContext.existingObjectWithID(objectID) as! Recipe
+    }
     
     var favRecipe = false
     
@@ -78,7 +81,9 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         tabBarController?.tabBar.hidden = true
         navigationController?.navigationBarHidden = false
         navigationItem.title = loadedRecipe.first!.items[0]["name"] as? String
-        favRecipe = (fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe).favorite as! Bool
+
+        favRecipe = recipe.favorite as! Bool
+
         if favRecipe {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Hearts-Filled-Red"), style: .Plain, target: self, action: #selector(RecipeDetailVC.favButtonTapped))
         } else {
@@ -163,7 +168,6 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     // Convenience method to load recipe into custom array
     // This allows us to use sections in the tableview
     func loadRecipe() -> [recipeSection] {
-        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
         
         // Section: Header
         let header = recipeSection(title: "Header", objects: [["image": recipe.image ?? UIImage(named: "avocado-banana-puree")!, "name": recipe.name ?? ""]])
@@ -194,7 +198,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
         // Section: Method
         var methodArray: [[String:AnyObject]] {
             var result = [[String:AnyObject]]()
-            print(recipe.method)
+            //print(recipe.method)
             var method = recipe.method?.allObjects as! [MethodStep]
             method.sortInPlace { Int($0.number!) < Int($1.number!) }
             for i in method {
@@ -220,7 +224,6 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func favButtonTapped() {
-        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
         
         if favRecipe {  // If currently favorite
             recipe.favorite = false // make not favorite

@@ -87,9 +87,6 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
-        print("Selected recipe: \(recipe.name)")
     }
     
     // MARK: - Navigation
@@ -98,9 +95,7 @@ class RecipeListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if segue.identifier == "RecipeDetailSegue" {
             if let detailController = segue.destinationViewController as? RecipeDetailVC {
                 if let indexPath = tableView.indexPathForSelectedRow {
-                    print("Segue to index path: \(indexPath)")
-                    detailController.indexPath = indexPath
-                    //detailController.recipe = fetchedResultsController.objectAtIndexPath(indexPath) as! Recipe
+                    detailController.objectID = fetchedResultsController.objectAtIndexPath(indexPath).objectID
                 }
             }
         }
