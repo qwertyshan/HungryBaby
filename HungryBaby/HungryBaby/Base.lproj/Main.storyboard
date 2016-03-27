@@ -123,7 +123,6 @@
                             <constraint firstItem="yaZ-eX-jqM" firstAttribute="top" secondItem="bvd-yr-cPA" secondAttribute="bottom" id="hc2-QT-Dg9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9iM-qB-6b1"/>
                     <connections>
                         <outlet property="email" destination="jKX-ZT-oYK" id="SxZ-vD-HOH"/>
                         <outlet property="password" destination="fKZ-in-B4v" id="n71-La-An7"/>
@@ -223,10 +222,7 @@
                             <constraint firstAttribute="bottom" secondItem="sHh-2z-HP5" secondAttribute="bottom" id="0nr-gI-pqp"/>
                             <constraint firstItem="sHh-2z-HP5" firstAttribute="leading" secondItem="ybf-qY-Rhf" secondAttribute="leadingMargin" constant="-20" id="BRq-X0-HE7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sHh-2z-HP5" secondAttribute="trailing" constant="-20" id="Eil-GR-aHM"/>
-                            <constraint firstItem="sHh-2z-HP5" firstAttribute="bottom" secondItem="ybf-qY-Rhf" secondAttribute="bottomMargin" id="Yms-T3-qqE"/>
                             <constraint firstItem="sHh-2z-HP5" firstAttribute="top" secondItem="1d6-Ux-aIF" secondAttribute="bottom" constant="-64" id="Zhp-MB-CYa"/>
-                            <constraint firstItem="sHh-2z-HP5" firstAttribute="top" secondItem="1d6-Ux-aIF" secondAttribute="bottom" constant="-64" id="fuI-JN-x5b"/>
-                            <constraint firstAttribute="trailing" secondItem="sHh-2z-HP5" secondAttribute="trailing" id="jzl-LK-Z31"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recipes" id="Axz-ME-ZIk"/>
