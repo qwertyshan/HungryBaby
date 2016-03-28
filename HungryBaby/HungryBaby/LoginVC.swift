@@ -49,6 +49,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginWithEmail(sender: UIButton) {
         if (email.text != "") && (password.text != "") {
+            dispatch_async(dispatch_get_main_queue()){
+                self.initActivityIndicator(self.activityIndicator)
+                self.activityIndicator.startAnimating()
+                super.view.addSubview(self.activityIndicator)
+            }
             APIClient.sharedInstance().loginWithEmail(email.text!, password: password.text!, completionHandler: loginCompletionHandler)
         } else {
             let error = NSError(domain: "Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Please enter email and password to login."])
@@ -57,6 +62,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginAnonymously(sender: UIButton) {
+        dispatch_async(dispatch_get_main_queue()){
+            self.initActivityIndicator(self.activityIndicator)
+            self.activityIndicator.startAnimating()
+            super.view.addSubview(self.activityIndicator)
+        }
         APIClient.sharedInstance().loginAnonymously(loginCompletionHandler)
     }
     
@@ -87,6 +97,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     func loginCompletionHandler(data: AnyObject?, error: NSError?) -> Void {
         if (error != nil) {
             CommonElements.showAlert(self, error: error!)
+            dispatch_async(dispatch_get_main_queue()){
+                self.stopActivityIndicator(self.activityIndicator)
+            }
         } else {
             print("Login successful")
             if self.getDataOnLogin() == true {
@@ -100,9 +113,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     func getDataOnLogin() -> Bool {
         var success = true
-        initActivityIndicator(activityIndicator)
-        activityIndicator.startAnimating()
-        self.view.addSubview(activityIndicator)
         
         APIClient.sharedInstance().getRecipePackage({data, error in
             if (error != nil) {
@@ -235,7 +245,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     func startMainApp() {
-        //print(fetchAllRecipes())
         dispatch_async(dispatch_get_main_queue()){
             self.stopActivityIndicator(self.activityIndicator)
         }
@@ -244,20 +253,13 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
     }
     
-    //override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //if segue.identifier == "TabBarSegue" {
-            //let tabBarController = segue.destinationViewController as! UITabBarController
-            //let viewController = tabBarController.viewControllers?[0] as! RecipeListVC
-            //print(self.recipes.enumerate())
-            //viewController.storedRecipes = self.recipes
-        //}
-    //}
-    
     func initActivityIndicator(activityIndicator: UIActivityIndicatorView) {
         // Set activity indicator
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
-        activityIndicator.frame.origin.x = view.frame.size.width / 2 - activityIndicator.frame.size.width / 2
-        activityIndicator.frame.origin.y = view.frame.size.height / 2 - activityIndicator.frame.size.height / 2
+        activityIndicator.frame = CGRect(x: 0,
+                                         y: 0,
+                                         width: super.view.frame.size.width,
+                                         height: super.view.frame.size.height)
         activityIndicator.backgroundColor = (UIColor(white: 0.2, alpha: 0.7))
         activityIndicator.hidesWhenStopped = true
     }
