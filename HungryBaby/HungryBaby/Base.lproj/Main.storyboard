@@ -711,7 +711,7 @@ the milk (or yogurt).</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Meal Plan" id="2mS-Ua-e3s">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="Jtc-hB-iAa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Jtc-hB-iAa">
                             <connections>
                                 <action selector="refreshMealPlan:" destination="xTJ-tH-M1D" id="edo-be-23t"/>
                             </connections>
@@ -885,6 +885,6 @@ the milk (or yogurt).</string>
         <image name="baby-with-spoon-square" width="280" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rd6-C7-mCB"/>
+        <segue reference="W0K-ez-fEJ"/>
     </inferredMetricsTieBreakers>
 </document>
