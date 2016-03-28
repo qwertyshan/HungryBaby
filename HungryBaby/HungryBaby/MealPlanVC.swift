@@ -218,6 +218,21 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         // If a plan exists, delete it. 
         // Then create a new one and add it to Core Data.
         
+        // Get count of existing recipes
+        let fetchRequest = NSFetchRequest(entityName: "Recipe")
+        var recipes = [Recipe]()
+        do {
+            recipes = try sharedContext.executeFetchRequest(fetchRequest) as! [Recipe]
+        } catch {}
+        let count = recipes.count
+        
+        // If there are no recipes, return
+        if count == 0 {
+            let error = NSError(domain: "Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "No recipes available. Please wait for recipes to download or restart the app."])
+            CommonElements.showAlert(self, error: error)
+            return
+        }
+        
         if fetchedMealPlanResultsController.fetchedObjects?.count != 0 {
             let fetchRequest = NSFetchRequest(entityName: "MealPlan")
             do {
@@ -235,14 +250,6 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         // Create new meal plan
         let newMealPlan = NSEntityDescription.insertNewObjectForEntityForName("MealPlan", inManagedObjectContext: sharedContext) as! MealPlan
         newMealPlan.startDate = NSDate()
-                
-        // Get count of existing recipes
-        let fetchRequest = NSFetchRequest(entityName: "Recipe")
-        var recipes = [Recipe]()
-        do {
-            recipes = try sharedContext.executeFetchRequest(fetchRequest) as! [Recipe]
-        } catch {}
-        let count = recipes.count
         
         for day in (0..<7) {
             for number in (0..<4) {
