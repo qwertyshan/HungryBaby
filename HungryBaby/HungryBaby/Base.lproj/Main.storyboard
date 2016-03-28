@@ -263,7 +263,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" image="avocado-banana-puree" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-iy-VjQ">
+                                                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-iy-VjQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="300" id="I8y-cK-zS9" userLabel="height = 250"/>
