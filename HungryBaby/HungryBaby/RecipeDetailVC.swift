@@ -170,7 +170,7 @@ class RecipeDetailVC: UIViewController, UITableViewDataSource, UITableViewDelega
     func loadRecipe() -> [recipeSection] {
         
         // Section: Header
-        let header = recipeSection(title: "Header", objects: [["image": recipe.image ?? UIImage(named: "avocado-banana-puree")!, "name": recipe.name ?? ""]])
+        let header = recipeSection(title: "Header", objects: [["image": recipe.image ?? UIImage(named: "default-placeholder")!, "name": recipe.name ?? ""]])
         
         // Section: Summary
         let summary = recipeSection(title: "Summary", objects: [["summary": recipe.summary ?? ""]])

@@ -263,7 +263,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-iy-VjQ">
+                                                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" image="default-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-iy-VjQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="300" id="I8y-cK-zS9" userLabel="height = 250"/>
@@ -883,6 +883,7 @@ the milk (or yogurt).</string>
         <image name="VegetarianFood-Filled-Blue" width="33" height="33"/>
         <image name="avocado-banana-puree" width="161" height="121"/>
         <image name="baby-with-spoon-square" width="280" height="280"/>
+        <image name="default-placeholder" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="W0K-ez-fEJ"/>
