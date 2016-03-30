@@ -162,6 +162,7 @@ class MealPlanVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
                     // Update the cell later, on the main thread
                     dispatch_async(dispatch_get_main_queue()) {
                         cell.cellImage!.image = UIImage(named: "Baby")!
+                        CommonElements.showAlert(self, error: error)
                         activityIndicator.stopAnimating()
                         activityIndicator.removeFromSuperview()
                     }

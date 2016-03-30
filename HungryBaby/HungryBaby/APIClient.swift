@@ -8,7 +8,7 @@
 
 import Foundation
 import Firebase
-
+import SystemConfiguration
 
 class APIClient: NSObject {
     
@@ -103,6 +103,12 @@ class APIClient: NSObject {
         
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
             
+            guard let connectedToNetwork = (self.connectedToNetwork() as Bool?) where connectedToNetwork == true else {
+                let error = NSError(domain: "Network Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Network is not available and some recipe images could not be downloaded. Please restart app in a stable network to download recipes."])
+                completionHandler(data: nil, error: error)
+                return 
+            }
+            
             if let error = downloadError {
                 completionHandler(data: nil, error: error)
             } else {
@@ -168,9 +174,31 @@ class APIClient: NSObject {
     }
     
     
-    
-    
     // MARK: - Helpers
+    
+    // Checking network reachability
+    
+    func connectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        guard let defaultRouteReachability = withUnsafePointer(&zeroAddress, {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }) else {
+            return false
+        }
+        
+        var flags : SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
+        
+        let isReachable = flags.contains(.Reachable)
+        let needsConnection = flags.contains(.ConnectionRequired)
+        return (isReachable && !needsConnection)
+    }
     
     // Parsing the JSON
     
